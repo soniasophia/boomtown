@@ -11,3 +11,16 @@
   width: 100%;
   flex:1;
 }
+
+.appHeader {
+  background-color: white;
+}
+
+.appHeader img {
+  height: 36px;
+  width: auto;
+}
+
+.appFooter {
+  text-align: center;
+}
