@@ -4,27 +4,29 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 
 const ItemCard = ({ itemDetails }) => (
-    <Card>
-        <CardMedia>
-            <img src={itemDetails.imageUrl} alt={itemDetails.title} />
-        </CardMedia>
+    <li className="itemCardWrapper">
+        <Card>
+            <CardMedia>
+                <img src={itemDetails.imageUrl} alt={itemDetails.title} />
+            </CardMedia>
 
-        <CardHeader
-            title={itemDetails.itemOwner.fullName}
-            subtitle={itemDetails.createdOn}
-            avatar="images/jsa-128.jpg"
-        />
+            <CardHeader
+                title={itemDetails.itemOwner.fullName}
+                subtitle={itemDetails.createdOn}
+                avatar="images/jsa-128.jpg"
+            />
 
-        <CardTitle title={itemDetails.title} subtitle={itemDetails.tags} />
+            <CardTitle title={itemDetails.title} subtitle={itemDetails.tags} />
 
-        <CardText>
-            <p>{itemDetails.description}</p>
-        </CardText>
+            <CardText>
+                <p>{itemDetails.description}</p>
+            </CardText>
 
-        <CardActions>
-            <FlatButton label="Borrow" />
-        </CardActions>
-    </Card>
+            <CardActions>
+                <FlatButton label="Borrow" />
+            </CardActions>
+        </Card>
+    </li>
 );
 
 export default ItemCard;
