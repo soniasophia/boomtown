@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from 'material-ui/AppBar';
-import { white } from 'material-ui/styles/colors';
-import logo from '../../images/boomtown-logo.svg';
+import HeaderBar from '../../components/HeaderBar';
 
 import './styles.css';
 
 const Layout = ({ children }) => (
     <div className="appContentWrapper">
-        <div className="appHeader">
-            <AppBar
-                iconElementLeft={<img src={logo} alt="logo" />}
-                style={{ backgroundColor: white }}
-            />
-        </div>
+        <HeaderBar />
         <div className="appContent">
             {children}
         </div>

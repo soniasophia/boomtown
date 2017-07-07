@@ -15,13 +15,19 @@ class ItemsContainer extends Component {
     }
 
     componentDidMount() {
-
-
+        fetch('http://localhost:3001/items')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    itemsData: data,
+                    loading: false
+                });
+            }).catch(error => console.log(error));
     }
 
     render() {
         if (this.state.loading) return <Loader />;
-        return <Items />;
+        return <Items itemsData={this.state.itemsData} />;
     }
 }
 
