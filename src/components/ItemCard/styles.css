@@ -1,0 +1,9 @@
+.authorInfo {
+  display: flex;
+  align-items: center;
+}
+
+.authorInfo img {
+  border-radius: 50%;
+  margin-left: 15px;
+}
