@@ -7,3 +7,8 @@
   border-radius: 50%;
   margin-left: 15px;
 }
+
+.borrowButton {
+  background-color: #333333 !important;
+  color: white !important;
+}

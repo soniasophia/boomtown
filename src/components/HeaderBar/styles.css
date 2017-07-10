@@ -5,4 +5,10 @@
 .appHeader img {
   height: 36px;
   width: auto;
+  margin-left: 15px;
+  margin-top: 7px;
+}
+
+.logoutButton {
+  background-color: #333333 !important;
 }

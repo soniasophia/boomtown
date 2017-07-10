@@ -24,11 +24,11 @@ const ItemCard = ({ itemDetails }) => (
             <CardTitle title={itemDetails.title} subtitle={itemDetails.tags} />
 
             <CardText>
-                <p>{itemDetails.description}</p>
+                {itemDetails.description}
             </CardText>
 
             <CardActions>
-                <FlatButton label="Borrow" />
+                <FlatButton label="Borrow" className="borrowButton" />
             </CardActions>
         </Card>
     </li>
