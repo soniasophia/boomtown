@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Gravatar from 'react-gravatar';
+import * as moment from 'moment';
 import './styles.css';
 
 const ItemCard = ({ itemDetails }) => (
@@ -10,13 +11,13 @@ const ItemCard = ({ itemDetails }) => (
             <CardMedia>
                 <img src={itemDetails.imageUrl} alt={itemDetails.title} />
             </CardMedia>
-            
+
             <div className="authorInfo">
                 <Gravatar email={itemDetails.itemOwner.email} />
 
                 <CardHeader
                     title={itemDetails.itemOwner.fullName}
-                    subtitle={itemDetails.createdOn}
+                    subtitle={moment.unix(itemDetails.createdOn).fromNow()}
                 />
             </div>
 
