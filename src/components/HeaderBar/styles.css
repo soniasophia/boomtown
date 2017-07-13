@@ -6,9 +6,24 @@
   height: 36px;
   width: auto;
   margin-left: 15px;
-  margin-top: 7px;
+  margin-right: 25px;
+  margin-top: 6px;
+}
+
+.filterBar {
+  top: -15px;
+}
+
+.appButtons {
+  display: flex;
+  align-items: center;
+}
+
+.profileButton {
+  margin-right: 20px;
 }
 
 .logoutButton {
   background-color: #333333 !important;
+  color: white !important;
 }
