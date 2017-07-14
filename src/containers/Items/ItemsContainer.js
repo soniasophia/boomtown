@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Items from './Items';
 import Loader from '../../components/Loader';
 
-import { fetchItems } from '../../redux/actions';
+import { fetchItems } from '../../redux/modules/items';
+
 
 class ItemsContainer extends Component {
 
@@ -17,6 +19,12 @@ class ItemsContainer extends Component {
         return <Items itemsData={this.props.itemsData} />;
     }
 }
+
+ItemsContainer.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+//TODO specify an array of what .. array of objects
 
 function mapStateToProps(state) {
     return {

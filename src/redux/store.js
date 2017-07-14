@@ -1,16 +1,13 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
+import combineReducers from './combine-reducers';
 
-import { itemsReducer } from './reducer';
 
 export default createStore(
-  combineReducers({
-      items: itemsReducer
-  }),
-
+  combineReducers,
   composeWithDevTools(
     applyMiddleware(
     thunk,

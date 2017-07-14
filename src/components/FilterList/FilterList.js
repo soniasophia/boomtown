@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
+//import action creator to dispatch the action on the onChange
+
 import './styles.css';
 
 const names = [
@@ -14,6 +16,7 @@ const names = [
     'Tools',
 ];
 
+// change to functional stateless component
 export default class FilterList extends Component {
     state = {
         values: [],
@@ -40,7 +43,7 @@ export default class FilterList extends Component {
                 multiple={true}
                 hintText="Filter by tag"
                 value={values}
-                onChange={this.handleChange}
+                onChange={this.handleChange} //dispatch action to update store
                 className="filterBar"
             >
                 {this.menuItems(values)}
