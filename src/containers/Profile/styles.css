@@ -3,3 +3,12 @@
   margin: 0 auto;
   margin-top: 40px;
 }
+
+.profileWrapper > :nth-child(1) > :nth-child(1) {
+  display: flex;
+  justify-content: space-around;
+}
+
+.userName span {
+  font-size: 40px !important;
+}

@@ -7,11 +7,7 @@
   width: auto;
   margin-left: 15px;
   margin-right: 25px;
-  margin-top: 6px;
-}
-
-.filterBar {
-  top: -15px;
+  margin-top: 5px;
 }
 
 .appButtons {
@@ -26,4 +22,8 @@
 .logoutButton {
   background-color: #333333 !important;
   color: white !important;
+}
+
+.logoutButton:hover {
+  background-color: #9a9a9a !important;
 }
