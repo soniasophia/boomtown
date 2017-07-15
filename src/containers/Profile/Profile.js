@@ -1,16 +1,17 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import Gravatar from 'react-gravatar';
 // import Gravatar from 'react-gravatar';
 import './styles.css';
 
-const Profile = () => (
+const Profile = ({ userData }) => (
     <div className="profileWrapper">
 
         <Card>
             <div className="userInfo">
-                <CardTitle title="User Profile" className="userName" />
+                <CardTitle title={userData.fullName} className="userName" />
                 <CardText className="userBio">
-                    User bio
+                    {userData.bio}
                 </CardText>
             </div>
 
@@ -19,7 +20,7 @@ const Profile = () => (
                 <CardTitle title="0" subtitle="Items borrowed" />
             </div>
             <CardHeader
-                avatar="images/jsa-128.jpg"
+                avatar={<Gravatar email={userData.email} className="gravatarImage" />}
             />
         </Card>
 

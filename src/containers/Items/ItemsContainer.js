@@ -24,7 +24,6 @@ ItemsContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     itemsData: PropTypes.arrayOf(PropTypes.object).isRequired
 };
-//TODO specify an array of what .. array of objects
 
 function mapStateToProps(state) {
     return {

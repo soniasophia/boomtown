@@ -3,10 +3,8 @@ import './styles.css';
 import ItemCardList from '../../components/ItemCardList';
 
 
-const Items = ({ itemsData }) => {
-    return (
-        <ItemCardList itemsData={itemsData} />
-    )
-}
+const Items = ({ itemsData }) => (
+    <ItemCardList itemsData={itemsData} />
+);
 
 export default Items;

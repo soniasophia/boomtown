@@ -14,11 +14,11 @@ const ItemCard = ({ itemDetails }) => (
             </CardMedia>
 
             <Link to={`/profile/${itemDetails.itemOwner.id}`}>
-            <CardHeader
-                title={itemDetails.itemOwner.fullName}
-                subtitle={moment.unix(itemDetails.createdOn).fromNow()}
-                avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
-            />
+                <CardHeader
+                    title={itemDetails.itemOwner.fullName}
+                    subtitle={moment.unix(itemDetails.createdOn).fromNow()}
+                    avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
+                />
             </Link>
 
             <CardTitle title={itemDetails.title} subtitle={itemDetails.tags} />
