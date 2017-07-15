@@ -6,10 +6,31 @@ import { Link } from 'react-router-dom';
 import * as moment from 'moment';
 import './styles.css';
 
+const statusOfItem = (itemDetails) => {
+    let status = '';
+    const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
+    if (itemDetails.borrower) {
+        if (itemDetails.itemOwner.id === fakeId) {
+            const borrower = itemDetails.itemBorrower.fullName;
+            status = `Lent to ${borrower}`;
+        } else {
+            status = 'Unavailable';
+        }
+    }
+
+    return status;
+};
+
+// if itemOwner is equal to userId then display borrower
+
 const ItemCard = ({ itemDetails }) => (
     <li className="itemCardWrapper">
         <Card>
-            <CardMedia>
+            <CardMedia overlay={
+                (!itemDetails.available) ?
+                    <CardTitle subtitle={statusOfItem(itemDetails)} className="itemStatus" />
+                : null
+           }>
                 <img src={itemDetails.imageUrl} alt={itemDetails.title} />
             </CardMedia>
 
@@ -28,7 +49,9 @@ const ItemCard = ({ itemDetails }) => (
             </CardText>
 
             <CardActions>
-                <FlatButton label="Borrow" className="borrowButton" />
+                {(itemDetails.available) ?
+                    <FlatButton label="Borrow" className="borrowButton" />
+                : null}
             </CardActions>
         </Card>
     </li>

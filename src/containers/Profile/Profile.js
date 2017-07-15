@@ -1,23 +1,46 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardHeader, CardTitle } from 'material-ui/Card';
 import Gravatar from 'react-gravatar';
-// import Gravatar from 'react-gravatar';
 import './styles.css';
 
-const Profile = ({ userData }) => (
+const getItemsBorrowed = (userData, itemsData) => {
+    const borrowed = itemsData.filter(item => userData.id === item.borrower);
+    return borrowed.length;
+};
+
+const getItemsShared = (userData, itemsData) => {
+    const shared = itemsData.filter(item => userData.id === item.itemOwner.id);
+    return shared.length;
+};
+
+const itemsCurrentlyBorrowed = (userData, itemsData) => {
+    const borrowed = itemsData.filter(item => userData.id === item.borrower);
+    return borrowed.map(item => {
+        return (
+            <li>{item.title} from {item.itemOwner.fullName}</li>
+        );
+    });
+}
+
+
+const Profile = ({ userData, itemsData }) => (
     <div className="profileWrapper">
 
         <Card>
             <div className="userInfo">
                 <CardTitle title={userData.fullName} className="userName" />
-                <CardText className="userBio">
-                    {userData.bio}
-                </CardText>
+                <CardTitle subtitle={userData.bio} className="userBio" />
+
+                <div className="currentlyBorrowing">
+                    <ul>
+                        <CardTitle title="Currently borrowing:" subtitle={itemsCurrentlyBorrowed(userData, itemsData)} />
+                    </ul>
+                </div>
             </div>
 
             <div className="userItems">
-                <CardTitle title="0" subtitle="Items shared" />
-                <CardTitle title="0" subtitle="Items borrowed" />
+                <CardTitle title={getItemsShared(userData, itemsData)} subtitle="Items shared" />
+                <CardTitle title={getItemsBorrowed(userData, itemsData)} subtitle="Items borrowed" />
             </div>
             <CardHeader
                 avatar={<Gravatar email={userData.email} className="gravatarImage" />}
