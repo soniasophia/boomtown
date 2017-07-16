@@ -1,7 +1,21 @@
+.profile {
+  width: 100%;
+  margin: 0 auto;
+}
+
 .profileWrapper {
   width: 55vw;
   margin: 0 auto;
   margin-top: 40px;
+}
+
+.userItems {
+  flex: 0 1 25%;
+}
+
+.profileWrapper > :nth-child(1) {
+  padding: 2rem;
+  margin: 2rem 0;
 }
 
 .profileWrapper > :nth-child(1) > :nth-child(1) {
@@ -9,6 +23,18 @@
   justify-content: space-around;
 }
 
-.userName span {
-  font-size: 40px !important;
+.gravatar-Image {
+  width: 29%;
+}
+
+.gravatar-Image img {
+  border-radius: 50%;
+}
+
+.userName span:first-child {
+  font-size: 39px !important;
+}
+
+.currentlyBorrowing span:first-child {
+  font-size: 14px !important;
 }

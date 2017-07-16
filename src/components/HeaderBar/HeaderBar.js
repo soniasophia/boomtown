@@ -11,7 +11,7 @@ const HeaderBar = () => (
     <div className="appHeader">
         <AppBar
             style={{ backgroundColor: white }}
-            iconElementLeft={<img className="AppbarLogo" src={logo} alt="Boomtown Logo" />}
+            iconElementLeft={<a href="/"> <img className="AppbarLogo" src={logo} alt="Boomtown Logo" /></a>}
 
             title={
                 <FilterList />

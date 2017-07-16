@@ -28,8 +28,7 @@ const Profile = ({ userData, itemsData }) => (
 
         <Card>
             <div className="userInfo">
-                <CardTitle title={userData.fullName} className="userName" />
-                <CardTitle subtitle={userData.bio} className="userBio" />
+                <CardTitle title={userData.fullName} subtitle={userData.bio} className="userName" />
 
                 <div className="currentlyBorrowing">
                     <ul>
@@ -43,7 +42,8 @@ const Profile = ({ userData, itemsData }) => (
                 <CardTitle title={getItemsBorrowed(userData, itemsData)} subtitle="Items borrowed" />
             </div>
             <CardHeader
-                avatar={<Gravatar email={userData.email} className="gravatarImage" />}
+                className="gravatar-Image"
+                avatar={<Gravatar email={userData.email} size={170} />}
             />
         </Card>
 

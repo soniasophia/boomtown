@@ -7,54 +7,66 @@ import * as moment from 'moment';
 import './styles.css';
 
 const statusOfItem = (itemDetails) => {
-    let status = '';
+    let itemStatus = '';
     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
     if (itemDetails.borrower) {
         if (itemDetails.itemOwner.id === fakeId) {
             const borrower = itemDetails.itemBorrower.fullName;
-            status = `Lent to ${borrower}`;
+            itemStatus = `Lent to ${borrower}`;
         } else {
-            status = 'Unavailable';
+            itemStatus = 'Unavailable';
         }
     }
 
-    return status;
+    return itemStatus;
 };
 
 // if itemOwner is equal to userId then display borrower
 
-const ItemCard = ({ itemDetails }) => (
-    <li className="itemCardWrapper">
-        <Card>
-            <CardMedia overlay={
-                (!itemDetails.available) ?
-                    <CardTitle subtitle={statusOfItem(itemDetails)} className="itemStatus" />
-                : null
-           }>
-                <img src={itemDetails.imageUrl} alt={itemDetails.title} />
-            </CardMedia>
+const ItemCard = ({ itemDetails }) => {
+    const getTags = (tagList) => {
+        let tagsList = '';
 
-            <Link to={`/profile/${itemDetails.itemOwner.id}`}>
-                <CardHeader
-                    title={itemDetails.itemOwner.fullName}
-                    subtitle={moment.unix(itemDetails.createdOn).fromNow()}
-                    avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
-                />
-            </Link>
+        for (let i = 0; i < tagList.length; i += 1) {
+            tagsList += tagList[i];
+            if (i < tagList.length - 1) tagsList += ', ';
+        }
+        return tagsList;
+    };
 
-            <CardTitle title={itemDetails.title} subtitle={itemDetails.tags} />
+    return (
+        <li className="itemCardWrapper">
+            <Card>
+                <CardMedia overlay={
+                    (!itemDetails.available) ?
+                        <CardTitle subtitle={statusOfItem(itemDetails)} className="itemStatus" />
+                    : null
+               }>
+                    <img src={itemDetails.imageUrl} alt={itemDetails.title} />
+                </CardMedia>
 
-            <CardText>
-                {itemDetails.description}
-            </CardText>
+                <Link to={`/profile/${itemDetails.itemOwner.id}`}>
+                    <CardHeader
+                        title={itemDetails.itemOwner.fullName}
+                        subtitle={moment.unix(itemDetails.createdOn).fromNow()}
+                        avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
+                    />
+                </Link>
 
-            <CardActions>
-                {(itemDetails.available) ?
-                    <FlatButton label="Borrow" className="borrowButton" />
-                : null}
-            </CardActions>
-        </Card>
-    </li>
-);
+                <CardTitle title={itemDetails.title} subtitle={getTags(itemDetails.tags)} />
+
+                <CardText>
+                    {itemDetails.description}
+                </CardText>
+
+                <CardActions>
+                    {(itemDetails.available) ?
+                        <FlatButton label="Borrow" className="borrowButton" />
+                    : null}
+                </CardActions>
+            </Card>
+        </li>
+    );
+};
 
 export default ItemCard;

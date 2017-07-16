@@ -20,12 +20,12 @@ export function fetchItems(userId) {
               fetch(url).then(response => response.json())
           ))).then(json => {
               const [items, users] = json;
-              let itemsWithOwners = items.map(item => {
+              const itemsWithOwners = items.map(item => {
                   const itemOwner = users.filter(user => user.id === item.itemOwner);
                   item.itemOwner = itemOwner[0];
                   return item;
               });
-              let itemsBorrowers = items.map(item => {
+              const itemsBorrowers = items.map(item => {
                   const itemBorrower = users.filter(user => user.id === item.borrower);
                   item.itemBorrower = itemBorrower[0];
                   return item;

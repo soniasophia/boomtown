@@ -15,14 +15,16 @@ class ProfileContainer extends Component {
         this.props.dispatch(fetchItems(this.props.match.params.id));
     }
 
-
     render() {
-        // const filteredItems = filterItemsByUser();
         if (this.props.loading) return <Loader />;
         return (
-            <div>
-                <Profile userData={this.props.myProfile} itemsData={this.props.itemsData} />
-                <Items itemsData={this.props.specificUserItems} />
+            <div className="profile">
+                <div>
+                    <Profile userData={this.props.myProfile} itemsData={this.props.itemsData} />
+                </div>
+                <div>
+                    <Items itemsData={this.props.specificUserItems} />
+                </div>
             </div>
         );
     }

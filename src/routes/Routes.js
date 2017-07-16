@@ -1,5 +1,4 @@
 import React from 'react';
-// npm install react-router-dom --save
 import { Switch, Route } from 'react-router-dom';
 
 import Login from '../containers/Login';
