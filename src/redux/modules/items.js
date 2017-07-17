@@ -29,6 +29,10 @@ export function selectFilterItems(filterValues) {
     };
 }
 
+// export function filterItemsData(itemsData, filterValues) {
+
+// }
+
 // THIS IS A THUNK FUNCTION
 export function fetchItems(userId) {
     return function (dispatch) {
@@ -62,6 +66,7 @@ export function fetchItems(userId) {
 const initialState = {
     loading: true,
     itemsData: [],
+    itemsDataFiltered: [],
     specificUserItems: [],
     filterValues: []
 };

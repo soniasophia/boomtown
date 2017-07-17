@@ -21,12 +21,8 @@ const tags = [
 
 // change to functional stateless component
 class FilterList extends Component {
-    // state = {
-    //     values: [],
-    // };
 
     handleChange = (event, index, filterValues) => this.props.dispatch(selectFilterItems(filterValues));
-    // handleChange = this.props.dispatch(handleChange())
 
     menuItems(filterValues) {
         return tags.map((tag) => (

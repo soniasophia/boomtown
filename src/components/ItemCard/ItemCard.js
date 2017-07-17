@@ -22,15 +22,7 @@ const statusOfItem = (itemDetails) => {
 
 
 const ItemCard = ({ itemDetails }) => {
-    const getTags = (tagList) => {
-        let tagsList = '';
-
-        for (let i = 0; i < tagList.length; i += 1) {
-            tagsList += tagList[i];
-            if (i < tagList.length - 1) tagsList += ', ';
-        }
-        return tagsList;
-    };
+    const getTags = itemDetails.tags.join(', ');
 
     return (
         <li className="itemCardWrapper">
@@ -51,7 +43,7 @@ const ItemCard = ({ itemDetails }) => {
                     />
                 </Link>
 
-                <CardTitle title={itemDetails.title} subtitle={getTags(itemDetails.tags)} />
+                <CardTitle title={itemDetails.title} subtitle={getTags} />
 
                 <CardText>
                     {itemDetails.description}
