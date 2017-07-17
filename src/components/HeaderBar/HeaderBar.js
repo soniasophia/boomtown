@@ -7,6 +7,7 @@ import logo from '../../images/boomtown-logo.svg';
 import FilterList from '../FilterList/FilterList';
 import './styles.css';
 
+
 const HeaderBar = () => (
     <div className="appHeader">
         <AppBar

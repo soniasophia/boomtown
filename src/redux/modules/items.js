@@ -1,5 +1,7 @@
 // ACTION CONSTANT
 export const LOAD_ITEMS = 'LOAD_ITEMS';
+export const LOAD_FILTER_ITEMS = 'LOAD_FILTER_ITEMS';
+export const SELECT_FILTER_ITEMS = 'SELECT_FILTER_ITEMS';
 
 
 // ACTION CREATORS
@@ -10,6 +12,20 @@ export function loadItems(itemsWithOwners, specificUserItems) {
             itemsWithOwners,
             specificUserItems
         }
+    };
+}
+
+// export function loadFilterItems(itemsData) {
+//     return {
+//         type: LOAD_FILTER_ITEMS,
+//         payload: itemsData
+//     };
+// }
+
+export function selectFilterItems(filterValues) {
+    return {
+        type: SELECT_FILTER_ITEMS,
+        payload: filterValues
     };
 }
 
@@ -47,7 +63,7 @@ const initialState = {
     loading: true,
     itemsData: [],
     specificUserItems: [],
-    filterValue: []
+    filterValues: []
 };
 
 export function itemsReducer(state = initialState, action) {
@@ -58,6 +74,13 @@ export function itemsReducer(state = initialState, action) {
             itemsData: action.payload.itemsWithOwners,
             specificUserItems: action.payload.specificUserItems
         };
+
+    case SELECT_FILTER_ITEMS:
+        const filterState = {
+            ...state,
+            filterValues: action.payload
+        };
+        return filterState;
 
     default:
         return state;

@@ -17,11 +17,9 @@ const statusOfItem = (itemDetails) => {
             itemStatus = 'Unavailable';
         }
     }
-
     return itemStatus;
 };
 
-// if itemOwner is equal to userId then display borrower
 
 const ItemCard = ({ itemDetails }) => {
     const getTags = (tagList) => {
