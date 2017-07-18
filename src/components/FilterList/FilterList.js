@@ -44,11 +44,4 @@ const FilterList = ({ dispatch, filterValues, handleChange }) => {
     );
 };
 
-
-// function mapStateToProps(state) {
-//     return {
-//         filterValues: state.items.filterValues
-//     };
-// }
-
 export default connect()(FilterList);

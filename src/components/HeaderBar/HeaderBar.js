@@ -17,12 +17,12 @@ const HeaderBar = ({ filterValues, dispatch }) => (
             style={{ backgroundColor: white }}
             iconElementLeft={<a href="/"><img className="AppbarLogo" src={logo} alt="Boomtown Logo" /></a>}
 
-            title={
+            title={(window.location.pathname === '/') ?
                 <FilterList
                     dispatch={dispatch}
                     handleChange={selectFilterItems}
                     filterValues={filterValues}
-                />
+                /> : null
             }
         >
             <div className="appButtons">
