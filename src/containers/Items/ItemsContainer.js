@@ -15,12 +15,11 @@ class ItemsContainer extends Component {
 
     filterItemsByTags(filterValues) {
         const items = this.props.itemsData;
-        let result = [];
 
-        if (filterValues) {
-            result = items.filter(item => item.tags.find(tag => filterValues.includes(tag)));
+        if (filterValues.length) {
+            return items.filter(item => item.tags.find(tag => filterValues.includes(tag)));
         }
-        return result.length > 0 ? result : items;
+        return items;
     }
 
     render() {
