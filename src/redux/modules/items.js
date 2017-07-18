@@ -5,12 +5,13 @@ export const SELECT_FILTER_ITEMS = 'SELECT_FILTER_ITEMS';
 
 
 // ACTION CREATORS
-export function loadItems(itemsWithOwners, specificUserItems) {
+export function loadItems(itemsWithOwners, specificUserItems, filterValues) {
     return {
         type: LOAD_ITEMS,
         payload: {
             itemsWithOwners,
-            specificUserItems
+            specificUserItems,
+            filterValues
         }
     };
 }
@@ -77,7 +78,8 @@ export function itemsReducer(state = initialState, action) {
         return {
             loading: false,
             itemsData: action.payload.itemsWithOwners,
-            specificUserItems: action.payload.specificUserItems
+            specificUserItems: action.payload.specificUserItems,
+            filterValues: action.payload.filterValues
         };
 
     case SELECT_FILTER_ITEMS:

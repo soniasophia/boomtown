@@ -35,9 +35,7 @@ const HeaderBar = ({ filterValues, dispatch }) => (
 
 function mapStateToProps(state) {
     return {
-        filterValues: state.items.filterValues,
-        handleChange: state.items.selectFilterItems,
-        dispatch: state.items.dispatch
+        filterValues: state.items.filterValues
     };
 }
 
