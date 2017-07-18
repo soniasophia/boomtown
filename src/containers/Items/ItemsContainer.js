@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 import Items from './Items';
 import Loader from '../../components/Loader';
-
 import { fetchItems } from '../../redux/modules/items';
 
 
@@ -14,21 +13,34 @@ class ItemsContainer extends Component {
         this.props.dispatch(fetchItems());
     }
 
+    filterItemsByTags(filterValues) {
+        const items = this.props.itemsData;
+
+        if (filterValues) {
+            return items.filter(item => item.tags.find(tag => filterValues.includes(tag)));
+        }
+        return items;
+    }
+
     render() {
         if (this.props.loading) return <Loader />;
-        return <Items itemsData={this.props.itemsData} />;
+        const { filterValues } = this.props;
+        const filteredItemsData = this.filterItemsByTags(filterValues);
+        return <Items itemsData={filteredItemsData} />;
     }
 }
 
 ItemsContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
-    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired
+    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 function mapStateToProps(state) {
     return {
         loading: state.items.loading,
-        itemsData: state.items.itemsData
+        itemsData: state.items.itemsData,
+        filterValues: state.items.filterValues
     };
 }
 

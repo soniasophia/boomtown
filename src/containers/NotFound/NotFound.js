@@ -1,10 +1,11 @@
 import React from 'react';
 import './styles.css';
+import notFound from '../../images/grumpycat.svg';
 
 const NotFound = () => (
     <div className="notFound">
-        {/*<img src={} alt="404" />*/}
-        <h1>404 Not Found</h1>
+        <img src={notFound} alt="404" className="notFound" />
+        <h1>Oops, it looks like you are lost!</h1>
     </div>
 );
 

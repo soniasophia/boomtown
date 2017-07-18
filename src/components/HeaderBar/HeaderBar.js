@@ -3,19 +3,26 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { white } from 'material-ui/styles/colors';
+import { connect } from 'react-redux';
 import logo from '../../images/boomtown-logo.svg';
-import FilterList from '../FilterList/FilterList';
 import './styles.css';
 
+import { selectFilterItems } from '../../redux/modules/items';
+import FilterList from '../FilterList';
 
-const HeaderBar = () => (
+
+const HeaderBar = ({ filterValues, dispatch }) => (
     <div className="appHeader">
         <AppBar
             style={{ backgroundColor: white }}
-            iconElementLeft={<a href="/"> <img className="AppbarLogo" src={logo} alt="Boomtown Logo" /></a>}
+            iconElementLeft={<a href="/"><img className="AppbarLogo" src={logo} alt="Boomtown Logo" /></a>}
 
             title={
-                <FilterList />
+                <FilterList
+                    dispatch={dispatch}
+                    handleChange={selectFilterItems}
+                    filterValues={filterValues}
+                />
             }
         >
             <div className="appButtons">
@@ -26,5 +33,13 @@ const HeaderBar = () => (
     </div>
 );
 
-export default HeaderBar;
+function mapStateToProps(state) {
+    return {
+        filterValues: state.items.filterValues,
+        handleChange: state.items.selectFilterItems,
+        dispatch: state.items.dispatch
+    };
+}
+
+export default connect(mapStateToProps)(HeaderBar);
 
