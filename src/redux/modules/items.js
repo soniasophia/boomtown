@@ -5,23 +5,15 @@ export const SELECT_FILTER_ITEMS = 'SELECT_FILTER_ITEMS';
 
 
 // ACTION CREATORS
-export function loadItems(itemsWithOwners, specificUserItems, filterValues) {
+export function loadItems(itemsWithOwners, specificUserItems) {
     return {
         type: LOAD_ITEMS,
         payload: {
             itemsWithOwners,
-            specificUserItems,
-            filterValues
+            specificUserItems
         }
     };
 }
-
-// export function loadFilterItems(itemsData) {
-//     return {
-//         type: LOAD_FILTER_ITEMS,
-//         payload: itemsData
-//     };
-// }
 
 export function selectFilterItems(filterValues) {
     return {
@@ -30,9 +22,6 @@ export function selectFilterItems(filterValues) {
     };
 }
 
-// export function filterItemsData(itemsData, filterValues) {
-
-// }
 
 // THIS IS A THUNK FUNCTION
 export function fetchItems(userId) {
@@ -67,7 +56,6 @@ export function fetchItems(userId) {
 const initialState = {
     loading: true,
     itemsData: [],
-    itemsDataFiltered: [],
     specificUserItems: [],
     filterValues: []
 };
@@ -76,10 +64,11 @@ export function itemsReducer(state = initialState, action) {
     switch (action.type) {
     case LOAD_ITEMS:
         return {
+            ...state,
             loading: false,
             itemsData: action.payload.itemsWithOwners,
             specificUserItems: action.payload.specificUserItems,
-            filterValues: action.payload.filterValues
+            // filterValues: action.payload.filterValues || []
         };
 
     case SELECT_FILTER_ITEMS:
