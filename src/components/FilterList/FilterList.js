@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
-
-
-//import action creator to dispatch the action on the onChange
 
 import './styles.css';
 
 
-// const FilterList = ({className, filterValues, dispatch, onChangeAction }) => { }
 const FilterList = ({ dispatch, filterValues, handleChange }) => {
     const tags = [
         'Electronics',
@@ -21,7 +18,6 @@ const FilterList = ({ dispatch, filterValues, handleChange }) => {
         'Tools'
     ];
 
-    // handleChange = (event, index, filterValues) => this.props.dispatch(selectFilterItems(filterValues));
 
     return (
         <SelectField
@@ -42,6 +38,12 @@ const FilterList = ({ dispatch, filterValues, handleChange }) => {
           ))}
         </SelectField>
     );
+};
+
+FilterList.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    filterValues: PropTypes.arrayOf(PropTypes.object).isRequired,
+    handleChange: PropTypes.func.isRequired
 };
 
 export default connect()(FilterList);

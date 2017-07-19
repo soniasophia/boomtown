@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { white } from 'material-ui/styles/colors';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import logo from '../../images/boomtown-logo.svg';
 import './styles.css';
@@ -26,12 +27,17 @@ const HeaderBar = ({ filterValues, dispatch }) => (
             }
         >
             <div className="appButtons">
-                <RaisedButton label="My Profile" primary={true} className="profileButton" />
-                <FlatButton label="Logout" secondary={true} className="logoutButton" />
+                <RaisedButton label="My Profile" className="profileButton" />
+                <FlatButton label="Logout" className="logoutButton" />
             </div>
         </AppBar >
     </div>
 );
+
+HeaderBar.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 function mapStateToProps(state) {
     return {

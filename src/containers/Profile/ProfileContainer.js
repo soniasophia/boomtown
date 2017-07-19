@@ -30,6 +30,15 @@ class ProfileContainer extends Component {
     }
 }
 
+ProfileContainer.propTypes = {
+    myProfile: PropTypes.objectOf.isRequired,
+    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    specificUserItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+    dispatch: PropTypes.func.isRequired,
+    loading: PropTypes.bool.isRequired,
+    match: PropTypes.objectOf.isRequired
+};
+
 function mapStateToProps(state) {
     return {
         loading: state.profile.loading,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle } from 'material-ui/Card';
 import Gravatar from 'react-gravatar';
+import PropTypes from 'prop-types';
 import './styles.css';
 
 const getItemsBorrowed = (userData, itemsData) => {
@@ -20,7 +21,7 @@ const itemsCurrentlyBorrowed = (userData, itemsData) => {
             <li>{item.title} from {item.itemOwner.fullName}</li>
         );
     });
-}
+};
 
 
 const Profile = ({ userData, itemsData }) => (
@@ -49,5 +50,10 @@ const Profile = ({ userData, itemsData }) => (
 
     </div>
 );
+
+Profile.propTypes = {
+    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    userData: PropTypes.objectOf.isRequired
+};
 
 export default Profile;

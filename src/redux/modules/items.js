@@ -68,7 +68,6 @@ export function itemsReducer(state = initialState, action) {
             loading: false,
             itemsData: action.payload.itemsWithOwners,
             specificUserItems: action.payload.specificUserItems,
-            // filterValues: action.payload.filterValues || []
         };
 
     case SELECT_FILTER_ITEMS:

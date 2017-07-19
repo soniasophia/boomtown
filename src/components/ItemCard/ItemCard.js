@@ -3,6 +3,7 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 import FlatButton from 'material-ui/FlatButton';
 import Gravatar from 'react-gravatar';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as moment from 'moment';
 import './styles.css';
 
@@ -57,6 +58,20 @@ const ItemCard = ({ itemDetails }) => {
             </Card>
         </li>
     );
+};
+
+ItemCard.propTypes = {
+    itemDetails: PropTypes.shape({
+        available: PropTypes.bool,
+        borrower: PropTypes.string,
+        createdOn: PropTypes.number,
+        description: PropTypes.string,
+        id: PropTypes.number,
+        imageUrl: PropTypes.string,
+        itemOwner: PropTypes.object,
+        tags: PropTypes.array,
+        title: PropTypes.string
+    }).isRequired
 };
 
 export default ItemCard;
