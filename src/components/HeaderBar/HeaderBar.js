@@ -27,8 +27,8 @@ const HeaderBar = ({ filterValues, dispatch }) => (
             }
         >
             <div className="appButtons">
-                <RaisedButton label="My Profile" className="profileButton" />
-                <FlatButton label="Logout" className="logoutButton" />
+                <RaisedButton label="My Profile" className="profileButton" backgroundColor="rgb(129, 212, 250)" labelColor="white" />
+                <FlatButton label="Logout" className="logoutButton" backgroundColor="#333333" hoverColor="#9a9a9a" />
             </div>
         </AppBar >
     </div>

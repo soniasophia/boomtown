@@ -20,10 +20,5 @@
 }
 
 .logoutButton {
-  background-color: #333333 !important;
   color: white !important;
-}
-
-.logoutButton:hover {
-  background-color: #9a9a9a !important;
 }
