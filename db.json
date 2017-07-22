@@ -274,6 +274,19 @@
       "createdOn": 1497044400,
       "available": true,
       "borrower": null
+    },
+    {
+      "title": "Cat",
+      "imageUrl": "https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg",
+      "itemOwner": "TyHcYnSocuOg6PmWQivgxerTLcq2",
+      "description": "Cat for rent",
+      "createdOn": 1500666215,
+      "tags": [
+        "Household Items"
+      ],
+      "available": true,
+      "borrower": null,
+      "id": 23
     }
   ],
   "users": [

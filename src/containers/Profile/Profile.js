@@ -4,19 +4,19 @@ import Gravatar from 'react-gravatar';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const getItemsBorrowed = (userData, itemsData) => {
-    const borrowed = itemsData.filter(item => userData.id === item.borrower);
-    return borrowed.length;
-};
+// const getItemsBorrowed = (userData, itemsData) => {
+//     const borrowed = itemsData.filter(item => userData.id === item.borrower);
+//     return borrowed.length;
+// };
 
-const getItemsShared = (userData, itemsData) => {
-    const shared = itemsData.filter(item => userData.id === item.itemOwner.id);
-    return shared.length;
-};
+// const getItemsShared = (userData, itemsData) => {
+//     const shared = itemsData.filter(item => userData.id === item.itemOwner.id);
+//     return shared.length;
+// };
 
-const itemsCurrentlyBorrowed = (userData, itemsData) => {
-    const borrowed = itemsData.filter(item => userData.id === item.borrower);
-    return borrowed.map(item => {
+const itemsCurrentlyBorrowed = (userData) => {
+    // const borrowed = itemsData.filter(item => userData.id === item.borrower);
+    return userData.borrowed.map(item => {
         return (
             <li>{item.title} from {item.itemOwner.fullName}</li>
         );
@@ -24,7 +24,7 @@ const itemsCurrentlyBorrowed = (userData, itemsData) => {
 };
 
 
-const Profile = ({ userData, itemsData }) => (
+const Profile = ({ userData }) => (
     <div className="profileWrapper">
 
         <Card>
@@ -33,14 +33,14 @@ const Profile = ({ userData, itemsData }) => (
 
                 <div className="currentlyBorrowing">
                     <ul>
-                        <CardTitle title="Currently borrowing:" subtitle={itemsCurrentlyBorrowed(userData, itemsData)} />
+                        <CardTitle title="Currently borrowing:" subtitle={itemsCurrentlyBorrowed(userData)} />
                     </ul>
                 </div>
             </div>
 
             <div className="userItems">
-                <CardTitle title={getItemsShared(userData, itemsData)} subtitle="Items shared" />
-                <CardTitle title={getItemsBorrowed(userData, itemsData)} subtitle="Items borrowed" />
+                <CardTitle title={userData.items.length} subtitle="Items shared" />
+                <CardTitle title={userData.borrowed.length} subtitle="Items borrowed" />
             </div>
             <CardHeader
                 className="gravatar-Image"

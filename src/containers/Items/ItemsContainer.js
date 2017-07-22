@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 
 import Items from './Items';
 import Loader from '../../components/Loader';
-import { fetchItems } from '../../redux/modules/items';
+// import { fetchItems } from '../../redux/modules/items';
 
 
 class ItemsContainer extends Component {
 
-    componentDidMount() {
-        this.props.dispatch(fetchItems());
-    }
+    // componentDidMount() {
+    //     this.props.dispatch(fetchItems());
+    // }
 
     filterItemsByTags(filterValues) {
-        const items = this.props.itemsData;
+        const items = this.props.data.items;
 
         if (filterValues.length) {
             return items.filter(item => item.tags.find(tag => filterValues.includes(tag)));
@@ -23,7 +25,7 @@ class ItemsContainer extends Component {
     }
 
     render() {
-        if (this.props.loading) return <Loader />;
+        if (this.props.data.loading) return <Loader />;
         const { filterValues } = this.props;
         const filteredItemsData = this.filterItemsByTags(filterValues);
         return <Items itemsData={filteredItemsData} />;
@@ -32,9 +34,21 @@ class ItemsContainer extends Component {
 
 ItemsContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
-    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    // data: PropTypes.shape({
+    //     loading: PropTypes.bool.isRequired
+    // }).isRequired,
+    // items: PropTypes.shape({
+    //     available: PropTypes.bool.isRequired,
+    //     borrower: PropTypes.string.isRequired,
+    //     createdOn: PropTypes.number.isRequired,
+    //     description: PropTypes.string.isRequired,
+    //     id: PropTypes.number.isRequired,
+    //     imageUrl: PropTypes.string.isRequired,
+    //     itemOwner: PropTypes.object.isRequired,
+    //     tags: PropTypes.string.isRequired,
+    //     title: PropTypes.string.isRequired
+    // }).isRequired,
     filterValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-    dispatch: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -45,4 +59,28 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(ItemsContainer);
+const getItems = gql `
+    query fetchItems {
+        items {
+            id
+            title
+            description
+            imageUrl
+            tags
+            itemOwner {
+                id
+                email
+                fullName
+                bio
+            }
+            createdOn
+            available
+            borrower {
+                id
+            }
+        }
+    }
+`;
+const ItemsContainerWithData = graphql(getItems)(ItemsContainer);
+export default connect(mapStateToProps)(ItemsContainerWithData);
+

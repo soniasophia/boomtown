@@ -12,7 +12,7 @@ const statusOfItem = (itemDetails) => {
     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
     if (itemDetails.borrower) {
         if (itemDetails.itemOwner.id === fakeId) {
-            const borrower = itemDetails.itemBorrower.fullName;
+            const borrower = itemDetails.borrower.fullName;
             itemStatus = `Lent to ${borrower}`;
         } else {
             itemStatus = 'Unavailable';
