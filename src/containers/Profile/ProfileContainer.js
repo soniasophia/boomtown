@@ -33,12 +33,7 @@ class ProfileContainer extends Component {
 }
 
 ProfileContainer.propTypes = {
-    myProfile: PropTypes.objectOf.isRequired,
-    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-    specificUserItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-    dispatch: PropTypes.func.isRequired,
-    loading: PropTypes.bool.isRequired,
-    match: PropTypes.objectOf.isRequired
+    loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -53,6 +48,7 @@ function mapStateToProps(state) {
 const getUsers = gql`
   query fetchUsers($id: ID!) {
     user(id: $id) {
+      id  
       fullName
       bio
       email
@@ -65,6 +61,7 @@ const getUsers = gql`
         createdOn
         available
         borrower {
+            id
             fullName
         }
         itemOwner {
@@ -77,11 +74,11 @@ const getUsers = gql`
           id
           title
           itemOwner {
+            id
             fullName
           }
       }
     }
-    
   }
 `;
 

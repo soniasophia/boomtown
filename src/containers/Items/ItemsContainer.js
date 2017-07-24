@@ -59,7 +59,7 @@ function mapStateToProps(state) {
     };
 }
 
-const getItems = gql `
+const getItems = gql`
     query fetchItems {
         items {
             id

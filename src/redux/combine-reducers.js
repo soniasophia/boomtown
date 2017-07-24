@@ -5,6 +5,6 @@ import client from '../config/apolloClient';
 
 export default combineReducers({
     items: itemsReducer,
-    profile: profileReducer,
+    // profile: profileReducer,
     apollo: client.reducer()
 });

@@ -52,7 +52,6 @@ const Profile = ({ userData }) => (
 );
 
 Profile.propTypes = {
-    itemsData: PropTypes.arrayOf(PropTypes.object).isRequired,
     userData: PropTypes.objectOf.isRequired
 };
 
