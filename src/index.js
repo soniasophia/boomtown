@@ -14,6 +14,26 @@ import muiTheme from './config/theme';
 
 import Layout from './components/Layout';
 import Routes from './routes';
+import { FirebaseAuth, FirebaseDB } from './config/firebase';
+import { setUserLogin } from './redux/modules/auth';
+
+FirebaseAuth.onAuthStateChanged((user) => {
+    if (user) {
+        createStore.dispatch(setUserLogin(user.uid));
+
+    // var displayName = user.displayName;
+    // var email = user.email;
+    // var emailVerified = user.emailVerified;
+    // var photoURL = user.photoURL;
+    // var isAnonymous = user.isAnonymous;
+    // var uid = user.uid;
+    // var providerData = user.providerData;
+    // ...
+    } else {
+    // User is signed out.
+        createStore.dispatch(setUserLogin(false));
+    }
+});
 
 injectTapEventPlugin();
 
