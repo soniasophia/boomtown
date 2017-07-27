@@ -12,7 +12,7 @@ const statusOfItem = (itemDetails) => {
     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
     if (itemDetails.borrower) {
         if (itemDetails.itemOwner.id === fakeId) {
-            const borrower = itemDetails.borrower.fullName;
+            const borrower = itemDetails.borrower.fullname;
             itemStatus = `Lent to ${borrower}`;
         } else {
             itemStatus = 'Unavailable';
@@ -38,7 +38,7 @@ const ItemCard = ({ itemDetails }) => {
 
                 <Link to={`/profile/${itemDetails.itemOwner.id}`}>
                     <CardHeader
-                        title={itemDetails.itemOwner.fullName}
+                        title={itemDetails.itemOwner.fullname}
                         subtitle={moment.unix(itemDetails.createdOn).fromNow()}
                         avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
                     />

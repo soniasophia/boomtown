@@ -49,7 +49,7 @@ const getUsers = gql`
   query fetchUsers($id: ID!) {
     user(id: $id) {
       id  
-      fullName
+      fullname
       bio
       email
       items {
@@ -62,12 +62,12 @@ const getUsers = gql`
         available
         borrower {
             id
-            fullName
+            fullname
         }
         itemOwner {
             id
             email
-            fullName
+            fullname
         }
       }
       borrowed {
@@ -75,7 +75,7 @@ const getUsers = gql`
           title
           itemOwner {
             id
-            fullName
+            fullname
           }
       }
     }

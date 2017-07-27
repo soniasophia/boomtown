@@ -18,7 +18,7 @@ const itemsCurrentlyBorrowed = (userData) => {
     // const borrowed = itemsData.filter(item => userData.id === item.borrower);
     return userData.borrowed.map(item => {
         return (
-            <li>{item.title} from {item.itemOwner.fullName}</li>
+            <li>{item.title} from {item.itemOwner.fullname}</li>
         );
     });
 };
@@ -29,7 +29,7 @@ const Profile = ({ userData }) => (
 
         <Card>
             <div className="userInfo">
-                <CardTitle title={userData.fullName} subtitle={userData.bio} className="userName" />
+                <CardTitle title={userData.fullname} subtitle={userData.bio} className="userName" />
 
                 <div className="currentlyBorrowing">
                     <ul>

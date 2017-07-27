@@ -19,7 +19,7 @@ export function showLoginError(loginError) {
 
 // REDUCERS
 export default (state = {
-    loginProfile: 'LOADING PROFILE',
+    loginProfile: false,
     showLoginError: false
 }, action) => {
     switch (action.type) {

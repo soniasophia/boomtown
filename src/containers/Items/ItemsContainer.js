@@ -69,9 +69,8 @@ const getItems = gql`
             tags
             itemOwner {
                 id
-                email
-                fullName
                 bio
+                fullname
             }
             createdOn
             available

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './Login';
 import { FirebaseAuth, FirebaseDB } from '../../config/firebase';
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
 
 class LoginContainer extends Component {
 
@@ -10,8 +11,8 @@ class LoginContainer extends Component {
     };
 
     login = ({ email, password }) => {
-        email = 'testuser3@gmail.com';
-        password = 'password';
+        // email = 'testuser3@gmail.com';
+        // password = 'password';
 
         FirebaseAuth.signInWithEmailAndPassword(email, password)
         .catch((error) => {
@@ -26,16 +27,25 @@ class LoginContainer extends Component {
     }
 
     render() {
-        this.login({ email: 'testuser3@gmail.com', password: 'password' });
+        // this.login({ email: 'testuser3@gmail.com', password: 'password' });
 
         if (this.props.authenticated) {
             return (
-                <Redirect to="/" />
+                <Redirect to={'/'} />
             );
         }
 
         return (
-            <Login login={this.login} />
+            <div className="login">
+                <div className="loginForm">
+                    <Login
+                        login={(e) => {
+                            e.preventDefault();
+                            this.login({ email: 'testuser3@gmail.com', password: 'password' });
+                        }}
+                    />
+                </div>
+            </div>
         );
     }
 }
