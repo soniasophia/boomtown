@@ -56,15 +56,15 @@ const getUsers = gql`
         id
         title
         description
-        imageUrl
+        imageurl
         tags
-        createdOn
+        createdon
         available
         borrower {
             id
             fullname
         }
-        itemOwner {
+        itemowner {
             id
             email
             fullname
@@ -73,7 +73,7 @@ const getUsers = gql`
       borrowed {
           id
           title
-          itemOwner {
+          itemowner {
             id
             fullname
           }

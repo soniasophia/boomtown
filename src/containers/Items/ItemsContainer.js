@@ -40,11 +40,11 @@ ItemsContainer.propTypes = {
     // items: PropTypes.shape({
     //     available: PropTypes.bool.isRequired,
     //     borrower: PropTypes.string.isRequired,
-    //     createdOn: PropTypes.number.isRequired,
+    //     createdon: PropTypes.number.isRequired,
     //     description: PropTypes.string.isRequired,
     //     id: PropTypes.number.isRequired,
-    //     imageUrl: PropTypes.string.isRequired,
-    //     itemOwner: PropTypes.object.isRequired,
+    //     imageurl: PropTypes.string.isRequired,
+    //     itemowner: PropTypes.object.isRequired,
     //     tags: PropTypes.string.isRequired,
     //     title: PropTypes.string.isRequired
     // }).isRequired,
@@ -65,14 +65,14 @@ const getItems = gql`
             id
             title
             description
-            imageUrl
+            imageurl
             tags
-            itemOwner {
+            itemowner {
                 id
                 bio
                 fullname
             }
-            createdOn
+            createdon
             available
             borrower {
                 id

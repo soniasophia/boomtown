@@ -11,7 +11,7 @@ const statusOfItem = (itemDetails) => {
     let itemStatus = '';
     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
     if (itemDetails.borrower) {
-        if (itemDetails.itemOwner.id === fakeId) {
+        if (itemDetails.itemowner.id === fakeId) {
             const borrower = itemDetails.borrower.fullname;
             itemStatus = `Lent to ${borrower}`;
         } else {
@@ -33,14 +33,14 @@ const ItemCard = ({ itemDetails }) => {
                         <CardTitle subtitle={statusOfItem(itemDetails)} className="itemStatus" />
                     : null
                }>
-                    <img src={itemDetails.imageUrl} alt={itemDetails.title} />
+                    <img src={itemDetails.imageurl} alt={itemDetails.title} />
                 </CardMedia>
 
-                <Link to={`/profile/${itemDetails.itemOwner.id}`}>
+                <Link to={`/profile/${itemDetails.itemowner.id}`}>
                     <CardHeader
-                        title={itemDetails.itemOwner.fullname}
-                        subtitle={moment.unix(itemDetails.createdOn).fromNow()}
-                        avatar={<Gravatar email={itemDetails.itemOwner.email} className="gravatarImage" />}
+                        title={itemDetails.itemowner.fullname}
+                        subtitle={moment.unix(itemDetails.createdon).fromNow()}
+                        avatar={<Gravatar email={itemDetails.itemowner.email} className="gravatarImage" />}
                     />
                 </Link>
 
@@ -64,11 +64,11 @@ ItemCard.propTypes = {
     itemDetails: PropTypes.shape({
         available: PropTypes.bool,
         borrower: PropTypes.string,
-        createdOn: PropTypes.number,
+        createdon: PropTypes.number,
         description: PropTypes.string,
         id: PropTypes.number,
-        imageUrl: PropTypes.string,
-        itemOwner: PropTypes.object,
+        imageurl: PropTypes.string,
+        itemowner: PropTypes.object,
         tags: PropTypes.array,
         title: PropTypes.string
     }).isRequired

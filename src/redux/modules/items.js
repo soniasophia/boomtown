@@ -31,8 +31,8 @@ export function fetchItems(userId) {
           ))).then(json => {
               const [items, users] = json;
               const itemsWithOwners = items.map(item => {
-                  const itemOwner = users.filter(user => user.id === item.itemOwner);
-                  item.itemOwner = itemOwner[0];
+                  const itemowner = users.filter(user => user.id === item.itemowner);
+                  item.itemowner = itemowner[0];
                   return item;
               });
               const itemsBorrowers = items.map(item => {
@@ -43,7 +43,7 @@ export function fetchItems(userId) {
               let specificUserItems = [];
               if (userId) {
                   specificUserItems = itemsWithOwners.filter(item => {
-                      return item.itemOwner.id === userId;
+                      return item.itemowner.id === userId;
                   });
               }
               dispatch(loadItems(itemsWithOwners, specificUserItems));

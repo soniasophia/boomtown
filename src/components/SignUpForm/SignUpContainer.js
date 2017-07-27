@@ -15,7 +15,6 @@ class SignUpContainer extends Component {
         });
     }
 
-
     signUpUser = (e) => {
         e.preventDefault();
         this.props.mutate({

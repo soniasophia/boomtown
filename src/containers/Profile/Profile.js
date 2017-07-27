@@ -10,7 +10,7 @@ import './styles.css';
 // };
 
 // const getItemsShared = (userData, itemsData) => {
-//     const shared = itemsData.filter(item => userData.id === item.itemOwner.id);
+//     const shared = itemsData.filter(item => userData.id === item.itemowner.id);
 //     return shared.length;
 // };
 
@@ -18,7 +18,7 @@ const itemsCurrentlyBorrowed = (userData) => {
     // const borrowed = itemsData.filter(item => userData.id === item.borrower);
     return userData.borrowed.map(item => {
         return (
-            <li>{item.title} from {item.itemOwner.fullname}</li>
+            <li>{item.title} from {item.itemowner.fullname}</li>
         );
     });
 };
