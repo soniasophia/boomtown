@@ -24,6 +24,7 @@ const statusOfItem = (itemDetails) => {
 
 const ItemCard = ({ itemDetails }) => {
     const getTags = itemDetails.tags.join(', ');
+    // subtitle={(itemDetails.tags.map(tag => tag.title).join(‘, ‘))}
 
     return (
         <li className="itemCardWrapper">

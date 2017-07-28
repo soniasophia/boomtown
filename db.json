@@ -287,6 +287,21 @@
       "available": true,
       "borrower": null,
       "id": 23
+    },
+    {
+      "title": "Test Item",
+      "imageurl": "https://www.europuppy.com/wp-content/uploads/x266-1024x640.jpg.pagespeed.ic.C2bnRbDKmK.jpg",
+      "itemowner": "7mMRaMWxokMA3lQxIqmRgHA0rEW2",
+      "description": "Test description",
+      "createdon": 1501192347,
+      "tags": [
+        {
+          "id": 2
+        }
+      ],
+      "available": true,
+      "borrower": null,
+      "id": 24
     }
   ],
   "users": [
