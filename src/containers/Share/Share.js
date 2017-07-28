@@ -1,5 +1,8 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import Gravatar from 'react-gravatar';
+import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import './styles.css';
 
 
@@ -8,22 +11,42 @@ const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
 
     return (
         <div>
-            <h1>Share stuff</h1>
+            <div className="newItemCard">
+                <Card>
+                    <CardMedia>
+                        <img src="https://www.europuppy.com/wp-content/uploads/x266-1024x640.jpg.pagespeed.ic.C2bnRbDKmK.jpg" alt="" />
+                    </CardMedia>
 
-            <form onSubmit={handleSubmit}>
-                <RaisedButton
-                    label="Select an Image"
-                    onClick={() => selectImage(uploadInput)}
-                />
-                <input
-                    onChange={handleImageUpload}
-                    ref={(input) => { uploadInput = input; }}
-                    hidden
-                    type="file"
-                    id="input"
-                />
+                    <CardHeader
+                        title="Item Owner"
+                        subtitle="Time created"
+                        avatar={<Gravatar email="fakeemail@gmail.com" className="gravatarImage" />}
+                    />
 
-            </form>
+                    <CardTitle title="New Item Title" subtitle="New Tags" />
+
+                    <CardText>
+                        New item description.
+                    </CardText>
+                </Card>
+            </div>
+
+
+            <div className="newItemForm">
+                <form onSubmit={handleSubmit}>
+                    <RaisedButton
+                        label="Select an Image"
+                        onClick={() => selectImage(uploadInput)}
+                    />
+                    <input
+                        onChange={handleImageUpload}
+                        ref={(input) => { uploadInput = input; }}
+                        hidden
+                        type="file"
+                        id="input"
+                    />
+                </form>
+            </div>
         </div>
     );
 };

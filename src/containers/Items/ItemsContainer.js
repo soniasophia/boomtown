@@ -73,11 +73,12 @@ const getItems = gql`
                 id
                 bio
                 fullname
+                email
             }
             created
             available
             borrower {
-                id
+                fullname
             }
         }
     }

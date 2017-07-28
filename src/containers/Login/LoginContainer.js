@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './Login';
-import { FirebaseAuth, FirebaseDB } from '../../config/firebase';
-import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import { FirebaseAuth } from '../../config/firebase';
 
 class LoginContainer extends Component {
 
@@ -28,10 +27,12 @@ class LoginContainer extends Component {
 
     render() {
         // this.login({ email: 'testuser3@gmail.com', password: 'password' });
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        const { authenticated, loginFormValues, ...props } = this.props;
 
         if (this.props.authenticated) {
             return (
-                <Redirect to={'/'} />
+                <Redirect to={from} />
             );
         }
 
@@ -39,6 +40,9 @@ class LoginContainer extends Component {
             <div className="login">
                 <div className="loginForm">
                     <Login
+                        {...props}
+                        // join={this.join}
+                        // reset={this.reset}
                         login={(e) => {
                             e.preventDefault();
                             this.login({ email: 'testuser3@gmail.com', password: 'password' });

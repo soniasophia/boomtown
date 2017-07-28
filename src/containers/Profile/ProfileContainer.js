@@ -57,7 +57,9 @@ const getUsers = gql`
         title
         description
         imageurl
-        tags
+        tags {
+            title
+        }
         created
         available
         borrower {

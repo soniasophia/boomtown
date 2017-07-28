@@ -7,15 +7,16 @@ import Items from '../containers/Items';
 import Profile from '../containers/Profile';
 import Share from '../containers/Share';
 import NotFound from '../containers/NotFound';
+import PrivateRoute from '../components/PrivateRoute';
 
 const Routes = () => (
     <Switch>
-        <Route exact path="/" component={Items} />
         <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
-        <Route exact path="/profile/:id" component={Profile} />
-        <Route path="/share" component={Share} />
-        <Route component={NotFound} />
+        <PrivateRoute exact path="/" component={Items} />
+        <PrivateRoute path="/signup" component={SignUp} />
+        <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <PrivateRoute path="/share" component={Share} />
+        <PrivateRoute component={NotFound} />
     </Switch>
 );
 

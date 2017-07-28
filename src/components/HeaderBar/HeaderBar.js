@@ -10,6 +10,7 @@ import './styles.css';
 
 import { selectFilterItems } from '../../redux/modules/items';
 import FilterList from '../FilterList';
+import { FirebaseAuth } from '../../config/firebase';
 
 
 const HeaderBar = ({ filterValues, dispatch }) => (
@@ -28,7 +29,13 @@ const HeaderBar = ({ filterValues, dispatch }) => (
         >
             <div className="appButtons">
                 <RaisedButton label="My Profile" className="profileButton" backgroundColor="rgb(129, 212, 250)" labelColor="white" />
-                <FlatButton label="Logout" className="logoutButton" backgroundColor="#333333" hoverColor="#9a9a9a" />
+                <FlatButton
+                    onTouchTap={() => FirebaseAuth.signOut()}
+                    label="Logout"
+                    className="logoutButton"
+                    backgroundColor="#333333"
+                    hoverColor="#9a9a9a"
+                />
             </div>
         </AppBar >
     </div>

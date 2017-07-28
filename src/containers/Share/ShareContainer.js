@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Share from './Share';
 import { FirebaseAuth, FirebaseStorage } from '../../config/firebase';
 
@@ -16,14 +18,14 @@ class ShareContainer extends Component {
         // TODO: this.props.dispatch(startImageUpload());
 
         cloud.child(`images/${userId}/${fileName}`)
-        .put(this.fileInput.files[0])
-        .then(result => {
-            console.log(result);
-            // TODO: this.props.dispatch(setItemImageUrl(result.metadata.downloadURLs[0]));
-            // this.handleNext();
-        }).catch(() => {
-            // TODO
-        });
+            .put(this.fileInput.files[0])
+            .then(result => {
+                console.log(result);
+                // TODO: this.props.dispatch(setItemImageUrl(result.metadata.downloadURLs[0]));
+                // this.handleNext();
+            }).catch(() => {
+                // TODO
+            });
     }
 
     handleSubmit = () => {
