@@ -58,7 +58,7 @@ const getUsers = gql`
         description
         imageurl
         tags
-        createdon
+        created
         available
         borrower {
             id
