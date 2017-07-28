@@ -23,7 +23,8 @@ class ShareContainer extends Component {
                 console.log(result);
                 // TODO: this.props.dispatch(setItemImageUrl(result.metadata.downloadURLs[0]));
                 // this.handleNext();
-            }).catch(() => {
+            }).catch((error) => {
+                console.log(error);
                 // TODO
             });
     }
@@ -32,7 +33,7 @@ class ShareContainer extends Component {
         const {
             itemTitle,
             itemDescription,
-        } = this.itemsData
+        } = this.itemsData;
     }
 
 

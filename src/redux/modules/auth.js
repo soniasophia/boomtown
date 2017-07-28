@@ -1,11 +1,11 @@
 // ACTION CONSTANT
-export const SET_USER_LOGIN = 'SET_USER_LOGIN';
+export const SET_AUTH_STATE = 'SET_AUTH_STATE';
 export const SHOW_LOGIN_ERROR = 'LOGIN_ERROR';
 
 // ACTION CREATORS
 export function setUserLogin(loginProfile) {
     return {
-        type: SET_USER_LOGIN,
+        type: SET_AUTH_STATE,
         payload: loginProfile
     };
 }
@@ -18,17 +18,19 @@ export function showLoginError(loginError) {
 }
 
 // REDUCERS
-export default (state = {
+const initialState = {
     loginProfile: false,
     showLoginError: false
-}, action) => {
+};
+
+export function authReducer(state = initialState, action) {
     switch (action.type) {
-    case SET_USER_LOGIN:
-        const loginState = {
+    case SET_AUTH_STATE:
+        const authState = {
             ...state,
             loginProfile: action.payload
         };
-        return loginState;
+        return authState;
 
     case SHOW_LOGIN_ERROR:
         const loginErrorState = {
@@ -40,5 +42,5 @@ export default (state = {
     default:
         return state;
     }
-};
+}
 

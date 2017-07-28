@@ -4,6 +4,7 @@ import Gravatar from 'react-gravatar';
 import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import './styles.css';
+import TextField from 'material-ui/TextField';
 
 
 const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
@@ -37,7 +38,21 @@ const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
                     <RaisedButton
                         label="Select an Image"
                         onClick={() => selectImage(uploadInput)}
-                    />
+                    /><br />
+                    <TextField
+                        hintText="Hint Text"
+                        floatingLabelText="Floating Label Text"
+                        className="shareTitle"
+                    /><br />
+                    <TextField
+                        hintText="Hint Text"
+                        floatingLabelText="Floating Label Text"
+                        className="shareDescription"
+                    /><br />
+                    <TextField
+                        hintText="Hint Text"
+                        floatingLabelText="Floating Label Text"
+                    /><br />
                     <input
                         onChange={handleImageUpload}
                         ref={(input) => { uploadInput = input; }}

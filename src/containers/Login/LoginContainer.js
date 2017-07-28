@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './Login';
 import { FirebaseAuth } from '../../config/firebase';
+import { showLoginError } from '../../redux/modules/auth';
+import { updateEmailField, updatePasswordField } from '../../redux/modules/forms';
+
 
 class LoginContainer extends Component {
 
-    static propTypes = {
-    };
+    handleEmail = (event) => {
+        this.props.dispatch(updateEmailField(event.target.value));
+    }
+
+    handlePassword = (event) => {
+        this.props.dispatch(updatePasswordField(event.target.value));
+    }
 
     login = ({ email, password }) => {
-        // email = 'testuser3@gmail.com';
-        // password = 'password';
-
         FirebaseAuth.signInWithEmailAndPassword(email, password)
         .catch((error) => {
             if (error.code === 'auth/user-not-found') {
@@ -47,6 +53,12 @@ class LoginContainer extends Component {
                             e.preventDefault();
                             this.login({ email: 'testuser3@gmail.com', password: 'password' });
                         }}
+                        handleEmail={(e) => {
+                            this.handleEmail(e);
+                        }}
+                        handlePassword={(e) => {
+                            this.handlePassword(e);
+                        }}
                     />
                 </div>
             </div>
@@ -54,9 +66,16 @@ class LoginContainer extends Component {
     }
 }
 
+LoginContainer.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    authenticated: PropTypes.bool.isRequired
+};
+
 const mapStateToProps = state => ({
     showLoginError: state.auth.showLoginError,
-    authenticated: state.auth.loginProfile
+    authenticated: state.auth.loginProfile,
+    updateEmailField: state.forms.emailField,
+    updatePasswordField: state.forms.passwordField
 });
 
 export default connect(mapStateToProps)(LoginContainer);
