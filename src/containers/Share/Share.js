@@ -11,7 +11,7 @@ const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
     let uploadInput = false;
 
     return (
-        <div>
+        <div className="newItemContainer">
             <div className="newItemCard">
                 <Card>
                     <CardMedia>

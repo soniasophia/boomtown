@@ -4,11 +4,22 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from './Login';
 import { FirebaseAuth } from '../../config/firebase';
-import { showLoginError } from '../../redux/modules/auth';
+import { showLoginError, redirectToSignUp } from '../../redux/modules/auth';
 import { updateEmailField, updatePasswordField } from '../../redux/modules/forms';
 
 
 class LoginContainer extends Component {
+
+    login = ({ email, password }) => {
+        FirebaseAuth.signInWithEmailAndPassword(email, password).catch((error) => {
+            const errorCode = error.code;
+            if (errorCode === 'auth/user-not-found') {
+                this.props.dispatch(redirectToSignUp(true));
+            } else {
+                // this.props.dispatch(showLoginError(true));
+            }
+        });
+    }
 
     handleEmail = (event) => {
         this.props.dispatch(updateEmailField(event.target.value));
@@ -18,27 +29,30 @@ class LoginContainer extends Component {
         this.props.dispatch(updatePasswordField(event.target.value));
     }
 
-    login = ({ email, password }) => {
-        FirebaseAuth.signInWithEmailAndPassword(email, password)
-        .catch((error) => {
-            if (error.code === 'auth/user-not-found') {
-                // USER DOES NOT EXIST, MUST SIGN UP
-                // TODO: this.props.dispatch(showJoinModal(true));
-            } else {
-                // THERE WAS AN ERROR, SHOW A MESSAGE
-                // TODO: this.props.dispatch(showLoginError(true));
-            }
-        });
+    redirect = () => {
+        this.props.dispatch(redirectToSignUp(false));
+        this.props.redirect();
     }
+
+    join = () => {
+        
+    }
+
 
     render() {
         // this.login({ email: 'testuser3@gmail.com', password: 'password' });
         const { from } = this.props.location.state || { from: { pathname: '/' } };
-        const { authenticated, loginFormValues, ...props } = this.props;
+        const { authenticated, redirectToSignUp, ...props } = this.props;
 
         if (this.props.authenticated) {
             return (
                 <Redirect to={from} />
+            );
+        }
+
+        if (this.props.redirectToSignUp) {
+            return (
+                <Redirect to={'/signup'} />
             );
         }
 
@@ -51,7 +65,7 @@ class LoginContainer extends Component {
                         // reset={this.reset}
                         login={(e) => {
                             e.preventDefault();
-                            this.login({ email: 'testuser3@gmail.com', password: 'password' });
+                            this.login({ email: this.props.updateEmailField, password: this.props.updatePasswordField });
                         }}
                         handleEmail={(e) => {
                             this.handleEmail(e);
@@ -68,14 +82,19 @@ class LoginContainer extends Component {
 
 LoginContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.bool.isRequired,
+    // forms: PropTypes.string.isRequired,
+    emailField: PropTypes.string.isRequired,
+    passwordField: PropTypes.string.isRequired,
+    redirectToSignUp: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
     showLoginError: state.auth.showLoginError,
     authenticated: state.auth.loginProfile,
     updateEmailField: state.forms.emailField,
-    updatePasswordField: state.forms.passwordField
+    updatePasswordField: state.forms.passwordField,
+    redirectToSignUp: state.auth.goToSignUp
 });
 
 export default connect(mapStateToProps)(LoginContainer);

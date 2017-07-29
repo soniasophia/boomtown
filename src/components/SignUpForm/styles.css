@@ -1,3 +1,21 @@
 .appContent {
   justify-content: center;
 }
+
+.userBio {
+  text-align: left;
+}
+
+.signUpForm h2 {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 2rem 0;
+}
+
+.signUpForm p {
+  margin: 0 2rem;
+}
+
+.signUpButtons {
+  margin: 2rem 0;
+}

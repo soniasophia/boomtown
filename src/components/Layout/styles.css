@@ -15,3 +15,9 @@
 .appFooter {
   text-align: center;
 }
+
+.shareButton {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+}

@@ -6,8 +6,8 @@ import { grey900 } from 'material-ui/styles/colors';
 import './styles.css';
 
 const style = {
-    height: 440,
-    width: 450,
+    height: 460,
+    width: 470,
     margin: 20,
     textAlign: 'center',
     display: 'inline-block',
@@ -31,6 +31,7 @@ const SignUpForm = ({ signUpUser }) => (
                     floatingLabelText="Your Name"
                     errorText="This field is required."
                     errorStyle={style.errorStyle}
+                    className="userName"
                 /><br />
 
                 <TextField
@@ -40,6 +41,7 @@ const SignUpForm = ({ signUpUser }) => (
                     multiLine={true}
                     errorStyle={style.errorStyle}
                     rows={3}
+                    className="userBio"
                 /><br />
                 <div className="signupButtons">
                     <FlatButton label="NO THANKS" />
