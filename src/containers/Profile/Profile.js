@@ -4,16 +4,6 @@ import Gravatar from 'react-gravatar';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-// const getItemsBorrowed = (userData, itemsData) => {
-//     const borrowed = itemsData.filter(item => userData.id === item.borrower);
-//     return borrowed.length;
-// };
-
-// const getItemsShared = (userData, itemsData) => {
-//     const shared = itemsData.filter(item => userData.id === item.itemowner.id);
-//     return shared.length;
-// };
-
 const itemsCurrentlyBorrowed = (userData) => {
     // const borrowed = itemsData.filter(item => userData.id === item.borrower);
     return userData.borrowed.map(item => {
@@ -52,7 +42,14 @@ const Profile = ({ userData }) => (
 );
 
 Profile.propTypes = {
-    userData: PropTypes.objectOf.isRequired
+    userData: PropTypes.shape({
+        bio: PropTypes.string.isRequired,
+        borrowed: PropTypes.arrayOf(PropTypes.object).isRequired,
+        email: PropTypes.string.isRequired,
+        fullname: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        items: PropTypes.arrayOf(PropTypes.object).isRequired
+    })
 };
 
 export default Profile;

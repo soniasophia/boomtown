@@ -25,8 +25,6 @@ const statusOfItem = (itemDetails) => {
 const ItemCard = ({ itemDetails }) => {
     const getTags = (itemDetails.tags.map(tag => tag.title).join(', '));
 
-    // subtitle={(itemDetails.tags.map(tag => tag.title).join(‘, ‘))}
-
     return (
         <li className="itemCardWrapper">
             <Card>
@@ -66,9 +64,9 @@ ItemCard.propTypes = {
     itemDetails: PropTypes.shape({
         available: PropTypes.bool,
         borrower: PropTypes.string,
-        created: PropTypes.number,
+        created: PropTypes.string,
         description: PropTypes.string,
-        id: PropTypes.number,
+        id: PropTypes.string,
         imageurl: PropTypes.string,
         itemowner: PropTypes.object,
         tags: PropTypes.array,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
@@ -19,7 +20,7 @@ const style = {
     },
 };
 
-const SignUpForm = ({ signUpUser }) => (
+const SignUpForm = ({ signUpUser, handleFullname, handleBio }) => (
     <div className="signUpForm">
         <Paper style={style} zDepth={3}>
             <h2>No Account With This Email.</h2>
@@ -32,6 +33,7 @@ const SignUpForm = ({ signUpUser }) => (
                     errorText="This field is required."
                     errorStyle={style.errorStyle}
                     className="userName"
+                    onChange={handleFullname}
                 /><br />
 
                 <TextField
@@ -42,14 +44,21 @@ const SignUpForm = ({ signUpUser }) => (
                     errorStyle={style.errorStyle}
                     rows={3}
                     className="userBio"
+                    onChange={handleBio}
                 /><br />
                 <div className="signupButtons">
-                    <FlatButton label="NO THANKS" />
-                    <FlatButton label="JOIN" primary type="submit" />
+                    <FlatButton label="No Thanks" href="/login" />
+                    <FlatButton label="Join" primary type="submit" />
                 </div>
             </form>
         </Paper>
     </div>
 );
+
+SignUpForm.propTypes = {
+    signUpUser: PropTypes.func.isRequired,
+    handleFullname: PropTypes.string.isRequired,
+    handleBio: PropTypes.string.isRequired
+};
 
 export default SignUpForm;

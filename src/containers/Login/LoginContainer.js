@@ -9,9 +9,9 @@ import { updateEmailField, updatePasswordField } from '../../redux/modules/forms
 
 
 class LoginContainer extends Component {
-
     login = ({ email, password }) => {
-        FirebaseAuth.signInWithEmailAndPassword(email, password).catch((error) => {
+        FirebaseAuth.signInWithEmailAndPassword(email, password)
+        .catch((error) => {
             const errorCode = error.code;
             if (errorCode === 'auth/user-not-found') {
                 this.props.dispatch(redirectToSignUp(true));
@@ -29,13 +29,13 @@ class LoginContainer extends Component {
         this.props.dispatch(updatePasswordField(event.target.value));
     }
 
-    redirect = () => {
-        this.props.dispatch(redirectToSignUp(false));
-        this.props.redirect();
-    }
+    // redirect = () => {
+    //     this.props.dispatch(redirectToSignUp(false));
+    //     this.props.redirect();
+    // }
 
     join = () => {
-        
+
     }
 
 
@@ -62,7 +62,7 @@ class LoginContainer extends Component {
                     <Login
                         {...props}
                         // join={this.join}
-                        // reset={this.reset}
+                        // redirect={this.redirect}
                         login={(e) => {
                             e.preventDefault();
                             this.login({ email: this.props.updateEmailField, password: this.props.updatePasswordField });
@@ -82,11 +82,12 @@ class LoginContainer extends Component {
 
 LoginContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    authenticated: PropTypes.bool.isRequired,
+    authenticated: PropTypes.string.isRequired,
     // forms: PropTypes.string.isRequired,
-    emailField: PropTypes.string.isRequired,
-    passwordField: PropTypes.string.isRequired,
-    redirectToSignUp: PropTypes.bool.isRequired
+    redirectToSignUp: PropTypes.bool.isRequired,
+    // redirect: PropTypes.func.isRequired,
+    updateEmailField: PropTypes.string.isRequired,
+    updatePasswordField: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({

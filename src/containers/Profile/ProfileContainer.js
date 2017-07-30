@@ -7,15 +7,8 @@ import Items from '../../containers/Items/Items';
 import Profile from './Profile';
 import Loader from '../../components/Loader';
 
-// import { fetchUserData } from '../../redux/modules/profile';
-// import { fetchItems } from '../../redux/modules/items';
 
 class ProfileContainer extends Component {
-
-    // componentDidMount() {
-    //     this.props.dispatch(fetchUserData(this.props.match.params.id));
-    //     this.props.dispatch(fetchItems(this.props.match.params.id));
-    // }
 
     render() {
         if (this.props.data.loading) return <Loader />;
@@ -38,10 +31,6 @@ ProfileContainer.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        // loading: state.profile.loading,
-        // myProfile: state.profile.myProfile,
-        // itemsData: state.items.itemsData,
-        // specificUserItems: state.items.specificUserItems
     };
 }
 
@@ -83,6 +72,31 @@ const getUsers = gql`
     }
   }
 `;
+
+ProfileContainer.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+        fetchMore: PropTypes.func.isRequired,
+        items: PropTypes.array.isRequired,
+        loading: PropTypes.bool.isRequired,
+        networkStatus: PropTypes.number.isRequired,
+        refetch: PropTypes.func.isRequired,
+        startPolling: PropTypes.func.isRequired,
+        stopPolling: PropTypes.func.isRequired,
+        subscribeToMore: PropTypes.func.isRequired,
+        updateQuery: PropTypes.func.isRequired,
+        variables: PropTypes.object.isRequired,
+    }),
+    user: PropTypes.shape({
+        bio: PropTypes.string.isRequired,
+        borrowed: PropTypes.arrayOf(PropTypes.object).isRequired,
+        email: PropTypes.string.isRequired,
+        fullname: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        items: PropTypes.arrayOf(PropTypes.object).isRequired
+    }),
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 const profileContainerWithData = graphql(getUsers, {
     options: props => ({

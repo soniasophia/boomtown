@@ -2,9 +2,9 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import Gravatar from 'react-gravatar';
 import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
-import './styles.css';
 import TextField from 'material-ui/TextField';
+// import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
+import './styles.css';
 
 
 const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
@@ -35,20 +35,24 @@ const Share = ({ handleSubmit, handleImageUpload, selectImage }) => {
 
             <div className="newItemForm">
                 <form onSubmit={handleSubmit}>
+                    <h1>Add an Image</h1>
+                    <p>We live in a visual culture. Upload an image of the item you're sharing.</p>
                     <RaisedButton
                         label="Select an Image"
                         onClick={() => selectImage(uploadInput)}
                     /><br />
+                    <h1>Add a Title & Description</h1>
                     <TextField
-                        hintText="Hint Text"
-                        floatingLabelText="Floating Label Text"
+                        hintText="Item Title"
+                        floatingLabelText="Item Title"
                         className="shareTitle"
                     /><br />
                     <TextField
-                        hintText="Hint Text"
-                        floatingLabelText="Floating Label Text"
+                        hintText="Item Description"
+                        floatingLabelText="Item Description"
                         className="shareDescription"
                     /><br />
+                    <h1>Categorize Your Item</h1>
                     <TextField
                         hintText="Hint Text"
                         floatingLabelText="Floating Label Text"
