@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   Route,
   Redirect
@@ -20,6 +21,10 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
         )}
     />
 );
+
+PrivateRoute.propTypes = {
+    authenticated: PropTypes.bool.isRequired
+};
 
 const mapStateToProps = state => ({
     authenticated: state.auth.loginProfile,

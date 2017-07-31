@@ -31,9 +31,6 @@ class SignUpContainer extends Component {
         this.props.dispatch(updateBioField(event.target.value));
     }
 
-    mutate = () => {
-
-    }
 
     signUpUser = (e) => {
         e.preventDefault();
