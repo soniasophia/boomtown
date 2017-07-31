@@ -14,7 +14,8 @@ Your project must include a server (Node/Express/GraphQL), a connected database 
 
 ## Screenshots
 <img src="https://preview.ibb.co/nhGguk/Screen_Shot_2017_07_31_at_12_38_51_AM.png" alt="Screen Shot 2017 07 31 at 12 38 51 AM" border="0" />
-## Technology Used
+
+## Technologies Used
 - JavaScript
 - React
 - Redux
