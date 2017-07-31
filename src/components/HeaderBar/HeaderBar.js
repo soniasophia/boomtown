@@ -14,43 +14,61 @@ import FilterList from '../FilterList';
 import { FirebaseAuth } from '../../config/firebase';
 
 
-const HeaderBar = ({ filterValues, dispatch }) => (
-    <div className="appHeader">
-        {(window.location.pathname === '/' && '/profile' && '/share') ?
-            <AppBar
-                style={{ backgroundColor: white }}
-                iconElementLeft={<Link to={'/'} ><img className="AppbarLogo" src={logo} alt="Boomtown Logo" /></Link>}
+const HeaderBar = ({ filterValues, dispatch, authenticated }) => {
+    if (authenticated) {
+        return (
+            <div className="appHeader">
+                <AppBar
+                    style={{ backgroundColor: white }}
+                    iconElementLeft={
+                        <Link to={'/'} >
+                            <img className="AppbarLogo" src={logo} alt="Boomtown Logo" />
+                        </Link>
+                        }
 
-                title={(window.location.pathname === '/') ?
-                    <FilterList
-                        dispatch={dispatch}
-                        handleChange={selectFilterItems}
-                        filterValues={filterValues}
-                    /> : null
-                }
-            >
-                <div className="appButtons">
-                    <RaisedButton label="My Profile" className="profileButton" backgroundColor="rgb(129, 212, 250)" labelColor="white" />
-                    <FlatButton
-                        onTouchTap={() => FirebaseAuth.signOut()}
-                        label="Logout"
-                        className="logoutButton"
-                        backgroundColor="#333333"
-                        hoverColor="#9a9a9a"
-                    />
-                </div>
-            </AppBar> : null }
-    </div>
-);
+                    title={
+                        <FilterList
+                            dispatch={dispatch}
+                            handleChange={selectFilterItems}
+                            filterValues={filterValues}
+                        />
+                    }
+                >
+                    <div className="appButtons">
+                        {authenticated && <Link to={`profile/${authenticated}`}>
+                            <RaisedButton
+                                label="My Profile"
+                                className="profileButton"
+                                backgroundColor="rgb(129, 212, 250)"
+                                labelColor="white"
+                            />
+                        </Link>}
+                        <FlatButton
+                            onTouchTap={() => FirebaseAuth.signOut()}
+                            label="Logout"
+                            className="logoutButton"
+                            backgroundColor="#333333"
+                            hoverColor="#9a9a9a"
+                        />
+                    </div>
+                </AppBar>
+            </div>
+        );
+    } else {
+        return null;
+    }
+};
 
 HeaderBar.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired
+    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+    authenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        filterValues: state.items.filterValues
+        filterValues: state.items.filterValues,
+        authenticated: state.auth.loginProfile
     };
 }
 

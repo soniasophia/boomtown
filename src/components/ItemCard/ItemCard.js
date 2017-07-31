@@ -2,9 +2,11 @@ import React from 'react';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Gravatar from 'react-gravatar';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as moment from 'moment';
+import { showBorrowModal } from '../../redux/modules/items';
 import './styles.css';
 
 const statusOfItem = (itemDetails) => {
@@ -22,7 +24,7 @@ const statusOfItem = (itemDetails) => {
 };
 
 
-const ItemCard = ({ itemDetails }) => {
+const ItemCard = ({ itemDetails, dispatch }) => {
     const getTags = (itemDetails.tags.map(tag => tag.title).join(', '));
 
     return (
@@ -52,7 +54,16 @@ const ItemCard = ({ itemDetails }) => {
 
                 <CardActions>
                     {(itemDetails.available) ?
-                        <FlatButton label="Borrow" className="borrowButton" />
+                        <FlatButton
+                            label="Borrow"
+                            className="borrowButton"
+                            onTouchTap={() => dispatch(showBorrowModal({
+                                id: itemDetails.id,
+                                itemowner: itemDetails.itemowner.fullname,
+                                showModal: true
+                            }))
+                        }
+                        />
                     : null}
                 </CardActions>
             </Card>
@@ -74,4 +85,8 @@ ItemCard.propTypes = {
     }).isRequired
 };
 
-export default ItemCard;
+const mapStateToProps = state => ({
+    authenticated: state.auth.loginProfile
+});
+
+export default connect(mapStateToProps)(ItemCard);

@@ -2,6 +2,8 @@
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_FILTER_ITEMS = 'LOAD_FILTER_ITEMS';
 export const SELECT_FILTER_ITEMS = 'SELECT_FILTER_ITEMS';
+export const SHOW_BORROW_MODAL = 'SHOW_BORROW_MODAL';
+export const HIDE_BORROW_MODAL = 'HIDE_BORROW_MODAL';
 
 
 // ACTION CREATORS
@@ -22,8 +24,22 @@ export function selectFilterItems(filterValues) {
     };
 }
 
+export function showBorrowModal(showBorrowModal) {
+    return {
+        type: SHOW_BORROW_MODAL,
+        payload: showBorrowModal
+    };
+}
 
-// THIS IS A THUNK FUNCTION
+export function hideBorrowModal(hideBorrowModal) {
+    return {
+        type: HIDE_BORROW_MODAL,
+        payload: hideBorrowModal
+    };
+}
+
+
+// THUNK FUNCTION
 export function fetchItems(userId) {
     return function (dispatch) {
         Promise.all(['http://localhost:3001/items', 'http://localhost:3001/users'].map(url => (
@@ -55,9 +71,12 @@ export function fetchItems(userId) {
 // REDUCER
 const initialState = {
     loading: true,
-    itemsData: [],
-    specificUserItems: [],
-    filterValues: []
+    filterValues: [],
+    borrowModalDisplayed: {
+        id: '',
+        itemowner: '',
+        showModal: false
+    },
 };
 
 export function itemsReducer(state = initialState, action) {
@@ -76,6 +95,19 @@ export function itemsReducer(state = initialState, action) {
             filterValues: action.payload
         };
         return filterState;
+
+    case SHOW_BORROW_MODAL:
+        const borrowState = {
+            ...state,
+            borrowModalDisplayed: action.payload
+        };
+        return borrowState;
+
+    case HIDE_BORROW_MODAL:
+        const hideModal = { ...state };
+        hideModal.borrowModalDisplayed.showModal = action.payload;
+
+        return hideModal;
 
     default:
         return state;

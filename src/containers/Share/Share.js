@@ -5,7 +5,6 @@ import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Ca
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
-// import { Step, Stepper, StepLabel, StepContent } from 'material-ui/Stepper';
 import { Field, reduxForm } from 'redux-form';
 import './styles.css';
 
