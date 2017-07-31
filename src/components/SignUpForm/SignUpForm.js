@@ -20,7 +20,7 @@ const style = {
     },
 };
 
-const SignUpForm = ({ signUpUser, handleFullname, handleBio }) => (
+const SignUpForm = ({ signUpUser, signUpForm, handleFullname, handleBio, handleEmail, handlePassword }) => (
     <div className="signUpForm">
         <Paper style={style} zDepth={3}>
             <h2>No Account With This Email.</h2>
@@ -46,6 +46,28 @@ const SignUpForm = ({ signUpUser, handleFullname, handleBio }) => (
                     className="userBio"
                     onChange={handleBio}
                 /><br />
+
+                <TextField
+                    hintText="Email"
+                    floatingLabelText="Email"
+                    errorText="This field is required."
+                    errorStyle={style.errorStyle}
+                    rows={3}
+                    className="userEmail"
+                    onChange={handleEmail}
+                /><br />
+
+                <TextField
+                    hintText="Password"
+                    floatingLabelText="Password"
+                    errorText="This field is required."
+                    errorStyle={style.errorStyle}
+                    rows={3}
+                    className="userPassword"
+                    onChange={handlePassword}
+                    type="password"
+                /><br />
+
                 <div className="signupButtons">
                     <FlatButton label="No Thanks" href="/login" />
                     <FlatButton label="Join" primary type="submit" />
@@ -58,7 +80,9 @@ const SignUpForm = ({ signUpUser, handleFullname, handleBio }) => (
 SignUpForm.propTypes = {
     signUpUser: PropTypes.func.isRequired,
     handleFullname: PropTypes.string.isRequired,
-    handleBio: PropTypes.string.isRequired
+    handleBio: PropTypes.string.isRequired,
+    handleEmail: PropTypes.string.isRequired,
+    handlePassword: PropTypes.string.isRequired
 };
 
 export default SignUpForm;

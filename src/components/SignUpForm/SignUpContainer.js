@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import SignUpForm from './SignUpForm';
@@ -10,9 +11,9 @@ import { updateFullnameField, updateBioField, updateEmailField, updatePasswordFi
 class SignUpContainer extends Component {
     login = ({ email, password }) => {
         FirebaseAuth.signInWithEmailAndPassword(email, password)
-        .catch((error) => {
-            console.log(error);
-        });
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     handleEmail = (event) => {
@@ -54,23 +55,40 @@ class SignUpContainer extends Component {
 
 
     render() {
-        return (
-            <div>
-                <SignUpForm
-                    signUpUser={(e) => {
-                        this.signUpUser(e);
-                    }}
+        const signUpForm = this.signUpForm;
+        const authenticated = this.props.authenticated;
 
-                    handleFullname={(e) => {
-                        this.handleFullname(e);
-                    }}
+        if (authenticated) {
+            return (<Redirect to="/" />);
+        } else {
+            return (
+                <div>
+                    <SignUpForm
+                        signUpUser={(e) => {
+                            this.signUpUser(e);
+                        }}
 
-                    handleBio={(e) => {
-                        this.handleBio(e);
-                    }}
-                />
-            </div>
-        );
+                        handleFullname={(e) => {
+                            this.handleFullname(e);
+                        }}
+
+                        handleBio={(e) => {
+                            this.handleBio(e);
+                        }}
+
+                        handleEmail={(e) => {
+                            this.handleEmail(e);
+                        }}
+
+                        handlePassword={(e) => {
+                            this.handlePassword(e);
+                        }}
+
+                        signUpForm={signUpForm}
+                    />
+                </div>
+            );
+        }
     }
 }
 
@@ -97,14 +115,18 @@ const addUser = gql`
 SignUpContainer.propTypes = {
     updateFullnameField: PropTypes.string.isRequired,
     updateBioField: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    updateEmailField: PropTypes.string.isRequired,
+    updatePasswordField: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     updateFullnameField: state.forms.fullnameField,
     updateBioField: state.forms.bioField,
     updateEmailField: state.forms.emailField,
-    updatePasswordField: state.forms.passwordField
+    updatePasswordField: state.forms.passwordField,
+    authenticated: state.auth.loginProfile,
+    signUpForm: state.forms
 });
 
 const SignUpWithData = graphql(addUser)(SignUpContainer);

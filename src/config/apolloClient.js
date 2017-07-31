@@ -9,12 +9,17 @@ const networkInterface = createNetworkInterface({
 
 networkInterface.use([{
     async applyMiddleware(req, next) {
+        const opsName = await req.request.operationName;
+        if (opsName === 'addUser') {
+            next();
+        } else {
         if (!req.options.headers) {
             req.options.headers = {}; // Create the header object if needed
         }
         const token = await FirebaseAuth.currentUser.getIdToken(true);
         req.options.headers['Authorization'] = token;
         next();
+        }
     }
 }]);
 
