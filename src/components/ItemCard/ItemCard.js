@@ -57,11 +57,11 @@ const ItemCard = ({ itemDetails, dispatch }) => {
                         <FlatButton
                             label="Borrow"
                             className="borrowButton"
-                            onTouchTap={() => dispatch(showBorrowModal({
-                                id: itemDetails.id,
-                                itemowner: itemDetails.itemowner.fullname,
-                                showModal: true
-                            }))
+                            onTouchTap={() => dispatch(showBorrowModal(
+                                itemDetails.id,
+                                itemDetails.itemowner.fullname,
+                                true
+                            ))
                         }
                         />
                     : null}

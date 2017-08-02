@@ -24,10 +24,10 @@ export function selectFilterItems(filterValues) {
     };
 }
 
-export function showBorrowModal(showBorrowModal) {
+export function showBorrowModal(itemid, itemowner, showBorrowModal) {
     return {
         type: SHOW_BORROW_MODAL,
-        payload: showBorrowModal
+        payload: { itemid, itemowner, showBorrowModal }
     };
 }
 
@@ -72,11 +72,9 @@ export function fetchItems(userId) {
 const initialState = {
     loading: true,
     filterValues: [],
-    borrowModalDisplayed: {
-        id: '',
-        itemowner: '',
-        showModal: false
-    },
+    itemid: '',
+    itemowner: '',
+    showBorrowModal: false
 };
 
 export function itemsReducer(state = initialState, action) {
@@ -97,17 +95,20 @@ export function itemsReducer(state = initialState, action) {
         return filterState;
 
     case SHOW_BORROW_MODAL:
-        const borrowState = {
+        const showModalState = {
             ...state,
-            borrowModalDisplayed: action.payload
+            itemid: action.payload.itemid,
+            itemowner: action.payload.itemowner,
+            showBorrowModal: action.payload.showBorrowModal
         };
-        return borrowState;
+        return showModalState;
 
     case HIDE_BORROW_MODAL:
-        const hideModal = { ...state };
-        hideModal.borrowModalDisplayed.showModal = action.payload;
-
-        return hideModal;
+        const hideModalState = {
+            ...state,
+            showBorrowModal: action.payload
+        };
+        return hideModalState;
 
     default:
         return state;

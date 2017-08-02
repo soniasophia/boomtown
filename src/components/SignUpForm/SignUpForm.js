@@ -7,8 +7,8 @@ import { grey900 } from 'material-ui/styles/colors';
 import './styles.css';
 
 const style = {
-    height: 460,
-    width: 470,
+    // height: 460,
+    // width: 470,
     margin: 20,
     textAlign: 'center',
     display: 'inline-block',

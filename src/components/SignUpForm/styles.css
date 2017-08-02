@@ -12,6 +12,12 @@
   margin: 2rem 0;
 }
 
+.signUpForm {
+    width: 600px;
+    max-width: 95%;
+    min-width: 320px;
+}
+
 .signUpForm p {
   margin: 0 2rem;
 }
