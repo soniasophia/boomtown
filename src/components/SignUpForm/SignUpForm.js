@@ -7,8 +7,6 @@ import { grey900 } from 'material-ui/styles/colors';
 import './styles.css';
 
 const style = {
-    // height: 460,
-    // width: 470,
     margin: 20,
     textAlign: 'center',
     display: 'inline-block',
@@ -52,7 +50,6 @@ const SignUpForm = ({ signUpUser, signUpForm, handleFullname, handleBio, handleE
                     floatingLabelText="Email"
                     errorText="This field is required."
                     errorStyle={style.errorStyle}
-                    rows={3}
                     className="userEmail"
                     onChange={handleEmail}
                 /><br />
@@ -62,7 +59,6 @@ const SignUpForm = ({ signUpUser, signUpForm, handleFullname, handleBio, handleE
                     floatingLabelText="Password"
                     errorText="This field is required."
                     errorStyle={style.errorStyle}
-                    rows={3}
                     className="userPassword"
                     onChange={handlePassword}
                     type="password"

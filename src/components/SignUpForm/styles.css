@@ -2,8 +2,9 @@
   justify-content: center;
 }
 
-.userBio, .userName {
+.userBio, .userName, .userEmail, .userPassword {
   text-align: left;
+  width: 70% !important;
 }
 
 .signUpForm h2 {
@@ -22,6 +23,7 @@
   margin: 0 2rem;
 }
 
-.signUpButtons {
-  margin: 2rem 0;
+.signupButtons {
+  margin: 1.5rem 0;
 }
+
