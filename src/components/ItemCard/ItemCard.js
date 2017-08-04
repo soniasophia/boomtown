@@ -9,31 +9,37 @@ import * as moment from 'moment';
 import { showBorrowModal } from '../../redux/modules/items';
 import './styles.css';
 
-const statusOfItem = (itemDetails) => {
-    let itemStatus = '';
-    const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
-    if (itemDetails.borrower) {
-        if (itemDetails.itemowner.id === fakeId) {
-            const borrower = itemDetails.borrower.fullname;
-            itemStatus = `Lent to ${borrower}`;
-        } else {
-            itemStatus = 'Unavailable';
-        }
-    }
-    return itemStatus;
-};
+// const statusOfItem = (itemDetails) => {
+//     let itemStatus = '';
+//     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
+//     if (itemDetails.borrower) {
+//         if (itemDetails.itemowner.id === fakeId) {
+//             const borrower = itemDetails.borrower.fullname;
+//             itemStatus = `Lent to ${borrower}`;
+//         } else {
+//             itemStatus = 'Unavailable';
+//         }
+//     }
+//     return itemStatus;
+// };
 
 
-const ItemCard = ({ itemDetails, dispatch }) => {
+const ItemCard = ({ itemDetails, dispatch, authenticated }) => {
     const getTags = (itemDetails.tags.map(tag => tag.title).join(', '));
 
     return (
         <li className="itemCardWrapper">
             <Card>
                 <CardMedia overlay={
-                    (!itemDetails.available) ?
-                        <CardTitle subtitle={statusOfItem(itemDetails)} className="itemStatus" />
-                    : null
+                    (itemDetails.borrower) ?
+                        <CardTitle subtitle={
+                            (itemDetails.itemowner.id === authenticated) ?
+                            `Lent to ${itemDetails.borrower.fullname}`
+                            :
+                            'Unavailable'
+                        }
+                        />
+                        : null
                }>
                     <img src={itemDetails.imageurl} alt={itemDetails.title} />
                 </CardMedia>
@@ -53,18 +59,18 @@ const ItemCard = ({ itemDetails, dispatch }) => {
                 </CardText>
 
                 <CardActions>
-                    {(itemDetails.available) ?
-                        <FlatButton
-                            label="Borrow"
-                            className="borrowButton"
-                            onTouchTap={() => dispatch(showBorrowModal(
+                    {(itemDetails.borrower || itemDetails.itemowner.id === authenticated) ? null :
+                    <FlatButton
+                        label="Borrow"
+                        className="borrowButton"
+                        onTouchTap={() => dispatch(showBorrowModal(
                                 itemDetails.id,
                                 itemDetails.itemowner.fullname,
                                 true
                             ))
                         }
-                        />
-                    : null}
+                    />
+                    }
                 </CardActions>
             </Card>
         </li>
@@ -82,7 +88,9 @@ ItemCard.propTypes = {
         itemowner: PropTypes.object,
         tags: PropTypes.array,
         title: PropTypes.string
-    }).isRequired
+    }).isRequired,
+    dispatch: PropTypes.func.isRequired,
+    authenticated: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
