@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Share from './Share';
-import { setItemImageUrl } from '../../redux/modules/share';
 import { FirebaseAuth, FirebaseStorage } from '../../config/firebase';
+import { updateStepIndex, setItemImageUrl, finishForm, resetShareForm } from '../../redux/modules/share';
 
 class ShareContainer extends Component {
 
-    // reset = () => {
-    //     this.props.dispatch(resetFields());
-    // }
+    handleNext = () => {
+        const { stepIndex } = this.props;
+        return this.props.dispatch(updateStepIndex(stepIndex + 1));
+    }
+
+    handlePrev = (stepIndex) => {
+        if (stepIndex > 0) {
+            return this.props.dispatch(updateStepIndex(stepIndex - 1));
+        }
+        return this.props.dispatch(updateStepIndex(stepIndex));
+    }
 
     selectImage = (fileInput) => {
         this.fileInput = this.fileInput || fileInput;
@@ -23,7 +33,6 @@ class ShareContainer extends Component {
         const cloud = FirebaseStorage.ref();
         const userId = FirebaseAuth.currentUser.uid;
         const fileName = this.fileInput.files[0].name;
-        // TODO: this.props.dispatch(startImageUpload());
 
         cloud.child(`images/${userId}/${fileName}`)
             .put(this.fileInput.files[0])
@@ -32,21 +41,19 @@ class ShareContainer extends Component {
                 this.props.dispatch(setItemImageUrl(result.metadata.downloadURLs[0]));
             }).catch((error) => {
                 console.log(error);
-                // TODO
             });
     }
 
-    addNewItem = (e) => {
-        e.preventDefault();
-        console.log(this.props.shareForm.values.itemTags);
+    addNewItem = () => {
+        this.props.dispatch(finishForm(true));
         this.props.mutate({
             variables: {
                 title: `${this.props.shareForm.values.shareTitle}`,
                 description: `${this.props.shareForm.values.shareDescription}`,
                 imageurl: `${this.props.imageurl}`,
                 itemowner: `${this.props.authenticated}`,
-                tags: this.props.shareForm.values.itemTags.map((itemTag) => {
-                    return { id: itemTag.id };
+                tags: this.props.shareForm.values.tags.map((tag) => {
+                    return { id: tag.id };
                 })
             }
         }).then(({ data }) => {
@@ -56,13 +63,50 @@ class ShareContainer extends Component {
         });
     }
 
+    renderStepActions = (step) => {
+        const { stepIndex } = this.props;
+
+        return (
+            <div style={{ margin: '12px 0' }}>
+                <RaisedButton
+                    label={stepIndex === 3 ? 'Finish' : 'Next'}
+                    disableTouchRipple={true}
+                    disableFocusRipple={true}
+                    primary={true}
+                    onTouchTap={stepIndex === 3 ? () => this.addNewItem() : () => this.handleNext()}
+                    style={{ marginRight: 12 }}
+                />
+                { step > 0 && (
+                    <FlatButton
+                        label="Back"
+                        disabled={stepIndex === 0}
+                        disableTouchRipple={true}
+                        disableFocusRipple={true}
+                        onTouchTap={() => this.handlePrev()}
+                    />
+                ) }
+            </div>
+        );
+    }
+
 
     render() {
+        const { stepIndex, finished } = this.props;
+
+        if (finished) {
+            this.props.dispatch(resetShareForm());
+            return (
+                <Redirect to={'/'} />
+            );
+        }
+
         return (
             <Share
                 selectImage={this.selectImage}
                 handleImageUpload={this.handleImageUpload}
                 addNewItem={this.addNewItem}
+                stepIndex={stepIndex}
+                renderStepActions={this.renderStepActions}
             />
         );
     }
@@ -101,9 +145,17 @@ function mapStateToProps(state) {
     return {
         authenticated: state.auth.loginProfile,
         shareForm: state.form.share,
-        imageurl: state.imageurl.imageField
+        imageurl: state.share.imageField,
+        finished: state.share.finished,
+        stepIndex: state.share.stepIndex
     };
 }
+
+ShareContainer.propTypes = {
+    stepIndex: PropTypes.number,
+    dispatch: PropTypes.func,
+    finished: PropTypes.bool
+};
 
 const shareContainerWithData = graphql(addItem)(ShareContainer);
 export default connect(mapStateToProps)(shareContainerWithData);

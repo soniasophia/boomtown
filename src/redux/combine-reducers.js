@@ -5,14 +5,14 @@ import { formsReducer } from './modules/forms';
 import { authReducer } from './modules/auth';
 // import { profileReducer } from './modules/profile';
 import client from '../config/apolloClient';
-import { uploadImageReducer } from './modules/share';
+import { shareReducer } from './modules/share';
 
 export default combineReducers({
     items: itemsReducer,
     auth: authReducer,
     forms: formsReducer,
     form: formReducer,
-    imageurl: uploadImageReducer,
+    share: shareReducer,
     // profile: profileReducer,
     apollo: client.reducer()
 });

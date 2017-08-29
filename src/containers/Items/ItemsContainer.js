@@ -6,14 +6,9 @@ import { graphql } from 'react-apollo';
 
 import Items from './Items';
 import Loader from '../../components/Loader';
-// import { fetchItems } from '../../redux/modules/items';
 
 
 class ItemsContainer extends Component {
-
-    // componentDidMount() {
-    //     this.props.dispatch(fetchItems());
-    // }
 
     filterItemsByTags(filterValues) {
         const items = this.props.data.items;

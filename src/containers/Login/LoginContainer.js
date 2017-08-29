@@ -29,15 +29,6 @@ class LoginContainer extends Component {
         this.props.dispatch(updatePasswordField(event.target.value));
     }
 
-    // redirect = () => {
-    //     this.props.dispatch(redirectToSignUp(false));
-    //     this.props.redirect();
-    // }
-
-    join = () => {
-
-    }
-
 
     render() {
         // this.login({ email: 'testuser3@gmail.com', password: 'password' });
