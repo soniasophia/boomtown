@@ -112,14 +112,6 @@ const addUser = gql`
     }
 `;
 
-SignUpContainer.propTypes = {
-    updateFullnameField: PropTypes.string.isRequired,
-    updateBioField: PropTypes.string.isRequired,
-    updateEmailField: PropTypes.string.isRequired,
-    updatePasswordField: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired
-};
-
 const mapStateToProps = state => ({
     updateFullnameField: state.forms.fullnameField,
     updateBioField: state.forms.bioField,
@@ -128,6 +120,16 @@ const mapStateToProps = state => ({
     authenticated: state.auth.loginProfile,
     signUpForm: state.forms
 });
+
+SignUpContainer.propTypes = {
+    updateFullnameField: PropTypes.string.isRequired,
+    updateBioField: PropTypes.string.isRequired,
+    updateEmailField: PropTypes.string.isRequired,
+    updatePasswordField: PropTypes.string.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    authenticated: PropTypes.string.isRequired,
+    mutate: PropTypes.func.isRequired
+};
 
 const SignUpWithData = graphql(addUser)(SignUpContainer);
 export default connect(mapStateToProps)(SignUpWithData);

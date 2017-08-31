@@ -52,8 +52,7 @@ class LoginContainer extends Component {
                 <div className="loginForm">
                     <Login
                         {...props}
-                        // join={this.join}
-                        // redirect={this.redirect}
+
                         login={(e) => {
                             e.preventDefault();
                             this.login({ email: this.props.updateEmailField, password: this.props.updatePasswordField });
@@ -74,11 +73,15 @@ class LoginContainer extends Component {
 LoginContainer.propTypes = {
     dispatch: PropTypes.func.isRequired,
     authenticated: PropTypes.string.isRequired,
-    // forms: PropTypes.string.isRequired,
     redirectToSignUp: PropTypes.bool.isRequired,
-    // redirect: PropTypes.func.isRequired,
     updateEmailField: PropTypes.string.isRequired,
-    updatePasswordField: PropTypes.string.isRequired
+    updatePasswordField: PropTypes.string.isRequired,
+    location: PropTypes.objectOf(PropTypes.shape({
+        hash: PropTypes.string,
+        key: PropTypes.string,
+        pathname: PropTypes.string,
+        search: PropTypes.string
+    })).isRequired
 };
 
 const mapStateToProps = state => ({

@@ -6,22 +6,22 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import './styles.css';
 
-const Borrow = ({ showBorrowModal, hideBorrowModal, dispatch }) => (
+const Borrow = ({ showModal, hideModal, dispatch, ownerName, borrowItem }) => (
     <Dialog
         title="Borrow Item"
         modal
-        open={showBorrowModal}
+        open={showModal}
         actions={[
             <FlatButton
                 label="No Thanks"
                 primary
-                onTouchTap={() => dispatch(hideBorrowModal(false))}
+                onTouchTap={() => dispatch(hideModal(false))}
             />,
             <RaisedButton
                 label="Borrow"
                 primary
                 disabled
-                onTouchTap={() => dispatch(hideBorrowModal(false))}
+                onTouchTap={() => dispatch(hideModal(false))}
             />
         ]}
     >
@@ -32,8 +32,10 @@ const Borrow = ({ showBorrowModal, hideBorrowModal, dispatch }) => (
 
 Borrow.propTypes = {
     dispatch: PropTypes.func.isRequired,
-    showBorrowModal: PropTypes.func.isRequired,
-    hideBorrowModal: PropTypes.func.isRequired
+    showModal: PropTypes.func.isRequired,
+    hideModal: PropTypes.func.isRequired,
+    ownerName: PropTypes.string.isRequired,
+    borrowItem: PropTypes.func.isRequired
 };
 
 export default connect()(Borrow);

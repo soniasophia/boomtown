@@ -27,25 +27,6 @@ class ItemsContainer extends Component {
     }
 }
 
-ItemsContainer.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    // data: PropTypes.shape({
-    //     loading: PropTypes.bool.isRequired
-    // }).isRequired,
-    // items: PropTypes.shape({
-    //     available: PropTypes.bool.isRequired,
-    //     borrower: PropTypes.string.isRequired,
-    //     created: PropTypes.number.isRequired,
-    //     description: PropTypes.string.isRequired,
-    //     id: PropTypes.number.isRequired,
-    //     imageurl: PropTypes.string.isRequired,
-    //     itemowner: PropTypes.object.isRequired,
-    //     tags: PropTypes.string.isRequired,
-    //     title: PropTypes.string.isRequired
-    // }).isRequired,
-    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
 function mapStateToProps(state) {
     return {
         loading: state.items.loading,
@@ -78,6 +59,35 @@ const getItems = gql`
         }
     }
 `;
+
+ItemsContainer.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    filterValues: PropTypes.arrayOf(PropTypes.string).isRequired,
+    data: PropTypes.objectOf(PropTypes.shape({
+        items: PropTypes.arrayOf(PropTypes.shape({
+            _typename: PropTypes.string,
+            available: PropTypes.bool,
+            borrower: PropTypes.string,
+            created: PropTypes.string,
+            description: PropTypes.string,
+            id: PropTypes.string,
+            imageurl: PropTypes.string,
+            itemowner: PropTypes.objectOf(PropTypes.shape({
+                _typename: PropTypes.string,
+                bio: PropTypes.string,
+                email: PropTypes.string,
+                fullname: PropTypes.string,
+                id: PropTypes.string,
+                tags: PropTypes.objectOf(PropTypes.shape({
+                    _typename: PropTypes.string,
+                    title: PropTypes.string
+                })),
+                title: PropTypes.string
+            }))
+        }))
+    })).isRequired
+};
+
 const ItemsContainerWithData = graphql(getItems)(ItemsContainer);
 export default connect(mapStateToProps)(ItemsContainerWithData);
 

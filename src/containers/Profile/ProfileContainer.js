@@ -25,14 +25,6 @@ class ProfileContainer extends Component {
     }
 }
 
-ProfileContainer.propTypes = {
-    loading: PropTypes.bool.isRequired
-};
-
-function mapStateToProps(state) {
-    return {
-    };
-}
 
 const getUsers = gql`
   query fetchUsers($id: ID!) {
@@ -75,7 +67,7 @@ const getUsers = gql`
 
 ProfileContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
-    data: PropTypes.shape({
+    data: PropTypes.objectOf(PropTypes.shape({
         fetchMore: PropTypes.func.isRequired,
         items: PropTypes.array.isRequired,
         loading: PropTypes.bool.isRequired,
@@ -86,16 +78,15 @@ ProfileContainer.propTypes = {
         subscribeToMore: PropTypes.func.isRequired,
         updateQuery: PropTypes.func.isRequired,
         variables: PropTypes.object.isRequired,
-    }),
-    user: PropTypes.shape({
-        bio: PropTypes.string.isRequired,
-        borrowed: PropTypes.arrayOf(PropTypes.object).isRequired,
-        email: PropTypes.string.isRequired,
-        fullname: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-        items: PropTypes.arrayOf(PropTypes.object).isRequired
-    }),
-    items: PropTypes.arrayOf(PropTypes.object).isRequired
+        user: PropTypes.objectOf(PropTypes.shape({
+            bio: PropTypes.string.isRequired,
+            borrowed: PropTypes.arrayOf(PropTypes.object).isRequired,
+            email: PropTypes.string.isRequired,
+            fullname: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            items: PropTypes.arrayOf(PropTypes.object).isRequired
+        }))
+    })).isRequired,
 };
 
 const profileContainerWithData = graphql(getUsers, {
@@ -104,4 +95,4 @@ const profileContainerWithData = graphql(getUsers, {
     }),
 })(ProfileContainer);
 
-export default connect(mapStateToProps)(profileContainerWithData);
+export default connect()(profileContainerWithData);

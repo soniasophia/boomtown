@@ -48,8 +48,8 @@ class ShareContainer extends Component {
         this.props.dispatch(finishForm(true));
         this.props.mutate({
             variables: {
-                title: `${this.props.shareForm.values.shareTitle}`,
-                description: `${this.props.shareForm.values.shareDescription}`,
+                title: `${this.props.shareForm.values.title}`,
+                description: `${this.props.shareForm.values.description}`,
                 imageurl: `${this.props.imageurl}`,
                 itemowner: `${this.props.authenticated}`,
                 tags: this.props.shareForm.values.tags.map((tag) => {
@@ -152,9 +152,12 @@ function mapStateToProps(state) {
 }
 
 ShareContainer.propTypes = {
-    stepIndex: PropTypes.number,
-    dispatch: PropTypes.func,
-    finished: PropTypes.bool
+    stepIndex: PropTypes.number.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    finished: PropTypes.bool.isRequired,
+    mutate: PropTypes.func.isRequired,
+    imageurl: PropTypes.string.isRequired,
+    authenticated: PropTypes.string.isRequired
 };
 
 const shareContainerWithData = graphql(addItem)(ShareContainer);

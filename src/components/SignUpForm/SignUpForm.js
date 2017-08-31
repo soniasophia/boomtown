@@ -18,7 +18,7 @@ const style = {
     },
 };
 
-const SignUpForm = ({ signUpUser, signUpForm, handleFullname, handleBio, handleEmail, handlePassword }) => (
+const SignUpForm = ({ signUpUser, handleFullname, handleBio, handleEmail, handlePassword }) => (
     <div className="signUpForm">
         <Paper style={style} zDepth={3}>
             <h2>No Account With This Email.</h2>

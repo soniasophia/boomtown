@@ -33,7 +33,7 @@ const ValidatedTextField = ({ label, onChange, type }) => (
 ValidatedTextField.propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    type: PropTypes.string.isRequired
+    type: PropTypes.string
 };
 
 export default ValidatedTextField;

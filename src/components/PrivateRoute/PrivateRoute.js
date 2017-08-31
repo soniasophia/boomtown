@@ -23,11 +23,18 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
 );
 
 PrivateRoute.propTypes = {
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.string.isRequired,
+    component: PropTypes.func.isRequired,
+    location: PropTypes.objectOf(PropTypes.shape({
+        hash: PropTypes.string,
+        key: PropTypes.string,
+        pathname: PropTypes.string,
+        search: PropTypes.string
+    })).isRequired
 };
 
 const mapStateToProps = state => ({
-    authenticated: state.auth.loginProfile,
+    authenticated: state.auth.loginProfile
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

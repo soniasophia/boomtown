@@ -1,7 +1,7 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 import Gravatar from 'react-gravatar';
+import PropTypes from 'prop-types';
 import {
     Step,
     Stepper,
@@ -15,19 +15,35 @@ import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form';
 import './styles.css';
 
+
+const validate = values => {
+    const errors = {};
+    const requiredFields = [
+        'title',
+        'description',
+        'tags'
+    ];
+    requiredFields.forEach(field => {
+        if (!values[field]) {
+            errors[field] = 'Required';
+        }
+    });
+    return errors;
+};
+
 const renderTextField = ({
     input,
     label,
     meta: { touched, error },
     ...custom
     }) =>
-    <TextField
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
-        {...input}
-        {...custom}
-    />;
+        <TextField
+            hintText={label}
+            floatingLabelText={label}
+            errorText={touched && error}
+            {...input}
+            {...custom}
+        />;
 
 const renderSelectField = ({
     input,
@@ -64,7 +80,11 @@ let Share = ({ addNewItem, handleImageUpload, selectImage, shareForm, stepIndex,
             <MenuItem
                 key={tag.title}
                 insetChildren={true}
-                checked={shareForm && shareForm.values.tags.includes(tag)}
+                checked={
+                    shareForm &&
+                    shareForm.values.tags &&
+                    shareForm.values.tags.includes(tag)
+                }
                 value={tag}
                 primaryText={tag.title}
             />
@@ -93,13 +113,12 @@ let Share = ({ addNewItem, handleImageUpload, selectImage, shareForm, stepIndex,
                 </Card>
             </div>
 
-
             <div className="newItemForm">
                 <div style={{ maxWidth: 380, maxHeight: 400, margin: 'auto' }}>
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         addNewItem();
-                    }}>
+                  }}>
                         <Stepper activeStep={stepIndex} orientation="vertical">
                             <Step>
                                 <StepLabel>Add an image</StepLabel>
@@ -158,45 +177,6 @@ let Share = ({ addNewItem, handleImageUpload, selectImage, shareForm, stepIndex,
                                 </StepContent>
                             </Step>
                         </Stepper>
-
-                        {/* <h1>Add an Image</h1>
-                    <p>We live in a visual culture. Upload an image of the item you're sharing.</p>
-                    <RaisedButton
-                        label="Select an Image"
-                        onClick={() => selectImage(uploadInput)}
-                    /><br />
-                    <h1>Add a Title & Description</h1>
-                    <Field
-                        component={renderTextField}
-                        label="Item Title"
-                        name="shareTitle"
-                    /><br />
-                    <Field
-                        component={renderTextField}
-                        label="Item Description"
-                        name="shareDescription"
-                    /><br />
-                    <h1>Categorize Your Item</h1>
-                    <Field
-                        name="itemTags"
-                        component={renderSelectField}
-                        label="Categorize Your Item"
-                    >
-                        {renderMenuItems(itemTags)}
-                    </Field>
-                    <input
-                        onChange={handleImageUpload}
-                        ref={(input) => { uploadInput = input; }}
-                        hidden
-                        type="file"
-                        id="input"
-                    />
-
-                    <h1>Confirm Things!</h1>
-                    <RaisedButton
-                        label="Share New Item"
-                        type="submit"
-                    /> */}
                     </form>
                 </div>
             </div>
@@ -206,7 +186,23 @@ let Share = ({ addNewItem, handleImageUpload, selectImage, shareForm, stepIndex,
 
 Share = reduxForm({
     // a unique name for the form
-    form: 'share'
+    form: 'share',
+    validate
 })(Share);
+
+Share.propTypes = {
+    addNewItem: PropTypes.func,
+    handleImageUpload: PropTypes.func,
+    selectImage: PropTypes.func,
+    stepIndex: PropTypes.number,
+    renderStepActions: PropTypes.func,
+    shareForm: PropTypes.objectOf(PropTypes.shape({
+        syncErrors: PropTypes.shape({
+            description: PropTypes.string,
+            tags: PropTypes.string,
+            title: PropTypes.string
+        })
+    }))
+};
 
 export default Share;
