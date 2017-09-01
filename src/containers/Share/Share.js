@@ -82,6 +82,7 @@ let Share = ({ addNewItem, handleImageUpload, selectImage, shareForm, stepIndex,
                 insetChildren={true}
                 checked={
                     shareForm &&
+                    shareForm.values &&
                     shareForm.values.tags &&
                     shareForm.values.tags.includes(tag)
                 }

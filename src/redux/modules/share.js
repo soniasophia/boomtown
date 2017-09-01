@@ -58,7 +58,7 @@ export function shareReducer(state = initialState, action) {
     case FINISH_FORM:
         const finishFormState = {
             ...state,
-            bool: action.payload
+            finished: action.payload
         };
         return finishFormState;
 
