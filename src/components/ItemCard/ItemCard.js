@@ -9,20 +9,6 @@ import * as moment from 'moment';
 import { showBorrowModal } from '../../redux/modules/items';
 import './styles.css';
 
-// const statusOfItem = (itemDetails) => {
-//     let itemStatus = '';
-//     const fakeId = 'LAi9TYWxgGhbjgHu1Sm6ZvB1tRP2';
-//     if (itemDetails.borrower) {
-//         if (itemDetails.itemowner.id === fakeId) {
-//             const borrower = itemDetails.borrower.fullname;
-//             itemStatus = `Lent to ${borrower}`;
-//         } else {
-//             itemStatus = 'Unavailable';
-//         }
-//     }
-//     return itemStatus;
-// };
-
 
 const ItemCard = ({ itemDetails, dispatch, authenticated }) => {
     const getTags = (itemDetails.tags.map(tag => tag.title).join(', '));

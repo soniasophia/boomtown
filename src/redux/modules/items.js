@@ -68,7 +68,7 @@ export function itemsReducer(state = initialState, action) {
             ...state,
             itemid: action.payload.itemid,
             itemowner: action.payload.itemowner,
-            showBorrowModal: action.payload.showBorrowModal
+            showBorrowModal: action.payload.showModal
         };
         return showModalState;
 

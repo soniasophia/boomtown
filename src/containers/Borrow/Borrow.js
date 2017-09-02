@@ -10,7 +10,7 @@ const Borrow = ({ showModal, hideModal, dispatch, ownerName, borrowItem }) => (
     <Dialog
         title="Borrow Item"
         modal
-        open={showModal}
+        open={true}
         actions={[
             <FlatButton
                 label="No Thanks"

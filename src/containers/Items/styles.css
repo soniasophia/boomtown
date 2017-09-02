@@ -1,3 +1,11 @@
+.itemsContainer {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
 .itemCardListWrapper {
     width: 100%;
 }

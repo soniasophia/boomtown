@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
 import Items from './Items';
+import Borrow from '../Borrow/';
 import Loader from '../../components/Loader';
 
 
@@ -23,7 +24,12 @@ class ItemsContainer extends Component {
         if (this.props.data.loading) return <Loader />;
         const { filterValues } = this.props;
         const filteredItemsData = this.filterItemsByTags(filterValues);
-        return <Items itemsData={filteredItemsData} />;
+        return (
+            <div className="itemsContainer">
+                <Items itemsData={filteredItemsData} />
+                {this.props.showModal && <Borrow />}
+            </div>
+        );
     }
 }
 
@@ -31,7 +37,8 @@ function mapStateToProps(state) {
     return {
         loading: state.items.loading,
         itemsData: state.items.itemsData,
-        filterValues: state.items.filterValues
+        filterValues: state.items.filterValues,
+        showModal: state.items.showBorrowModal
     };
 }
 
