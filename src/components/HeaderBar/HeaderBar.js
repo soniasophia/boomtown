@@ -62,7 +62,7 @@ const HeaderBar = ({ filterValues, dispatch, authenticated }) => {
 HeaderBar.propTypes = {
     dispatch: PropTypes.func.isRequired,
     filterValues: PropTypes.arrayOf(PropTypes.string).isRequired,
-    authenticated: PropTypes.bool.isRequired
+    authenticated: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

@@ -13,7 +13,7 @@ Continue working on your Boomtown by adding the server-side components. Once com
 Your project must include a server (Node/Express/GraphQL), a connected database (PostgreSQL), a connected client (React), and form with submit and data validation (Redux-Form), and user authentication (Firebase).
 
 ## Screenshots
-<img src="https://preview.ibb.co/nhGguk/Screen_Shot_2017_07_31_at_12_38_51_AM.png" alt="Screen Shot 2017 07 31 at 12 38 51 AM" border="0" />
+<img src="https://preview.ibb.co/bADWZF/Screen_Shot_2017_09_02_at_6_28_18_PM.png" alt="Screen Shot 2017 07 31 at 12 38 51 AM" border="0" />
 
 ## Technologies Used
 - JavaScript

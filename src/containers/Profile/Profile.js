@@ -16,14 +16,15 @@ const itemsCurrentlyBorrowed = (userData) => {
 
 const Profile = ({ userData }) => (
     <div className="profileWrapper">
-
         <Card>
             <div className="userInfo">
                 <CardTitle title={userData.fullname} subtitle={userData.bio} className="userName" />
 
                 <div className="currentlyBorrowing">
                     <ul>
-                        <CardTitle title="Currently borrowing:" subtitle={itemsCurrentlyBorrowed(userData)} />
+                        {(userData.borrowed.length) ?
+                            <CardTitle title="Currently borrowing:" subtitle={itemsCurrentlyBorrowed(userData)} />
+                            : null}
                     </ul>
                 </div>
             </div>
@@ -37,7 +38,6 @@ const Profile = ({ userData }) => (
                 avatar={<Gravatar email={userData.email} size={170} />}
             />
         </Card>
-
     </div>
 );
 
@@ -49,7 +49,7 @@ Profile.propTypes = {
         fullname: PropTypes.string.isRequired,
         id: PropTypes.string.isRequired,
         items: PropTypes.arrayOf(PropTypes.object).isRequired
-    })
+    }).isRequired
 };
 
 export default Profile;

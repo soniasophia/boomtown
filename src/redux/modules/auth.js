@@ -27,7 +27,7 @@ export function showLoginError(loginError) {
 
 // REDUCERS
 const initialState = {
-    loginProfile: false,
+    loginProfile: '',
     showLoginError: false,
     goToSignUp: false
 };

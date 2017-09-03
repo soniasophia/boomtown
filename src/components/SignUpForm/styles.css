@@ -4,7 +4,7 @@
 
 .userBio, .userName, .userEmail, .userPassword {
   text-align: left;
-  width: 70% !important;
+  width: 80% !important;
 }
 
 .signUpForm h2 {

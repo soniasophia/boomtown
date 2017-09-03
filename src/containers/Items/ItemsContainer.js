@@ -92,7 +92,8 @@ ItemsContainer.propTypes = {
                 title: PropTypes.string
             }))
         }))
-    })).isRequired
+    })).isRequired,
+    showModal: PropTypes.bool
 };
 
 const ItemsContainerWithData = graphql(getItems)(ItemsContainer);
